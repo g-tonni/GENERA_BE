@@ -25,6 +25,12 @@ public class User {
     private String website;
 
     @Column(nullable = false)
+    private String profileImage;
+
+    @Column(nullable = false)
+    private String profileCoverSketch;
+
+    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
@@ -43,6 +49,8 @@ public class User {
     public User(String name, String email, String password, Role role) {
         this.name = name;
         this.email = email;
+        this.profileImage = "https://ui-avatars.com/api/?name=" + name;
+        this.profileCoverSketch = "";
         this.password = password;
         this.createdAt = LocalDateTime.now();
         this.role = role;
@@ -106,6 +114,22 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getProfileCoverSketch() {
+        return profileCoverSketch;
+    }
+
+    public void setProfileCoverSketch(String profileCoverSketch) {
+        this.profileCoverSketch = profileCoverSketch;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 
     @Override

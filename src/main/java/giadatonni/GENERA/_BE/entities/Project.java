@@ -21,6 +21,8 @@ public class Project {
 
     private String howToInteract;
 
+    private String cover;
+
     @Column(columnDefinition = "TEXT", nullable = false)
     private String script;
 
@@ -108,6 +110,14 @@ public class Project {
 
     public User getAuthor() {
         return author;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     @Override
