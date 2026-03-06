@@ -1,4 +1,12 @@
 package giadatonni.GENERA._BE.payloads;
 
-public class RegisterDTO {
+public record RegisterDTO(
+
+        String name,
+
+        String email,
+
+        String password
+) {
+
 }

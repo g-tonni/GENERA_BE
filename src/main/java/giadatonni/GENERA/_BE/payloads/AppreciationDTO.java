@@ -1,4 +1,11 @@
 package giadatonni.GENERA._BE.payloads;
 
-public class AppreciationDTO {
+import java.util.UUID;
+
+public record AppreciationDTO(
+
+        UUID projectId,
+
+        UUID userId
+) {
 }

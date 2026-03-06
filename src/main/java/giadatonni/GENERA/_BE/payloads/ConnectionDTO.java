@@ -1,4 +1,11 @@
 package giadatonni.GENERA._BE.payloads;
 
-public class ConnectionDTO {
+import java.util.UUID;
+
+public record ConnectionDTO(
+
+        UUID followerId,
+
+        UUID followedId
+) {
 }

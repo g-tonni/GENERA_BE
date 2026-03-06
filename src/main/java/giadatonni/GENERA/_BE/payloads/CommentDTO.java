@@ -1,4 +1,14 @@
 package giadatonni.GENERA._BE.payloads;
 
-public class CommentDTO {
+import java.util.UUID;
+
+public record CommentDTO(
+
+        String content,
+
+        UUID projectId,
+
+        UUID userId
+) {
+
 }

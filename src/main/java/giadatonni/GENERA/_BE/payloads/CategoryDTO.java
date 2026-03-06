@@ -1,4 +1,6 @@
 package giadatonni.GENERA._BE.payloads;
 
-public class CategoryDTO {
+public record CategoryDTO(
+        String category
+) {
 }

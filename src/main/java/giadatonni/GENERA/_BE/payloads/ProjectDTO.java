@@ -1,4 +1,16 @@
 package giadatonni.GENERA._BE.payloads;
 
-public class ProjectDTO {
+import java.util.UUID;
+
+public record ProjectDTO(
+        String title,
+
+        String description,
+
+        String howToInteract,
+
+        String cover,
+
+        UUID categoryId
+) {
 }

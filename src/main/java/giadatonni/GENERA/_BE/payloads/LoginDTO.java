@@ -1,4 +1,8 @@
 package giadatonni.GENERA._BE.payloads;
 
-public class LoginDTO {
+public record LoginDTO(
+        String email,
+
+        String password
+) {
 }
