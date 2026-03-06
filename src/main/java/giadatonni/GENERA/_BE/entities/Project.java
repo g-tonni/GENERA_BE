@@ -21,6 +21,7 @@ public class Project {
 
     private String howToInteract;
 
+    @Column(nullable = false)
     private String cover;
 
     @Column(columnDefinition = "TEXT", nullable = false)
