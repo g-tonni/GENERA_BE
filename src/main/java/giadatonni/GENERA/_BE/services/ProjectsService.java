@@ -6,6 +6,7 @@ import giadatonni.GENERA._BE.entities.Category;
 import giadatonni.GENERA._BE.entities.Project;
 import giadatonni.GENERA._BE.entities.User;
 import giadatonni.GENERA._BE.exceptions.NotFoundException;
+import giadatonni.GENERA._BE.exceptions.UnauthorizedException;
 import giadatonni.GENERA._BE.payloads.ProjectDTO;
 import giadatonni.GENERA._BE.payloads.SketchDTO;
 import giadatonni.GENERA._BE.repositories.ProjectsRepository;
@@ -45,9 +46,12 @@ public class ProjectsService {
         return newProject;
     }
 
-    public Project editProjectInfo(UUID projectId, ProjectDTO body) {
+    public Project editProjectInfo(User user, UUID projectId, ProjectDTO body) {
 
         Project project = this.findProjectById(projectId);
+
+        if (!user.getUserId().equals(project.getAuthor().getUserId()))
+            throw new UnauthorizedException("A user can only edit their own projects");
 
         Category category = this.categoriesService.findCategoryById(body.category());
 
@@ -63,19 +67,13 @@ public class ProjectsService {
         return project;
     }
 
-    public void editSketch(UUID projectId, SketchDTO body) {
 
+    public Project editCover(User user, UUID projectId, MultipartFile file) {
         Project project = this.findProjectById(projectId);
 
-        project.setScript(body.code());
+        if (!user.getUserId().equals(project.getAuthor().getUserId()))
+            throw new UnauthorizedException("A user can only edit their own projects");
 
-        this.projectsRepository.save(project);
-
-        System.out.println("Sketch updated");
-    }
-
-    public Project editCover(UUID projectId, MultipartFile file) {
-        Project project = this.findProjectById(projectId);
         try {
             Map result = cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
             String imageUrl = (String) result.get("secure_url");
@@ -86,5 +84,19 @@ public class ProjectsService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void editSketch(User user, UUID projectId, SketchDTO body) {
+
+        Project project = this.findProjectById(projectId);
+
+        if (!user.getUserId().equals(project.getAuthor().getUserId()))
+            throw new UnauthorizedException("A user can only edit their own projects");
+
+        project.setScript(body.code());
+
+        this.projectsRepository.save(project);
+
+        System.out.println("Sketch updated");
     }
 }

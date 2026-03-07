@@ -38,7 +38,7 @@ public class ProjectsController {
     }
 
     @PutMapping("/{projectId}/editInfo")
-    public Project editProjectInfo(@PathVariable UUID projectId, @RequestBody @Validated ProjectDTO body, BindingResult validationResults) {
+    public Project editProjectInfo(@AuthenticationPrincipal User user, @PathVariable UUID projectId, @RequestBody @Validated ProjectDTO body, BindingResult validationResults) {
         if (validationResults.hasErrors()) {
             List<String> errorsList = validationResults
                     .getFieldErrors()
@@ -47,19 +47,21 @@ public class ProjectsController {
                     .toList();
             throw new ValidationException(errorsList);
         } else {
-            return this.projectsService.editProjectInfo(projectId, body);
+            return this.projectsService.editProjectInfo(user, projectId, body);
         }
     }
 
     @PatchMapping("/{projectId}/cover")
-    public Project editCover(@PathVariable UUID projectId, @RequestParam("cover") MultipartFile file) {
-        return this.projectsService.editCover(projectId, file);
+    public Project editCover(@AuthenticationPrincipal User user, @PathVariable UUID projectId, @RequestParam("cover") MultipartFile file) {
+        return this.projectsService.editCover(user, projectId, file);
     }
 
     @PatchMapping("/{projectId}/sketch")
-    public void editSketch(@PathVariable UUID projectId,
-                           @RequestBody @Validated SketchDTO body,
-                           BindingResult validationResults) {
+    public void editSketch(
+            @AuthenticationPrincipal User user,
+            @PathVariable UUID projectId,
+            @RequestBody @Validated SketchDTO body,
+            BindingResult validationResults) {
         if (validationResults.hasErrors()) {
             List<String> errorsList = validationResults
                     .getFieldErrors()
@@ -68,7 +70,7 @@ public class ProjectsController {
                     .toList();
             throw new ValidationException(errorsList);
         } else {
-            this.projectsService.editSketch(projectId, body);
+            this.projectsService.editSketch(user, projectId, body);
         }
     }
 }
