@@ -4,8 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import java.util.UUID;
-
 public record ProjectDTO(
 
         @NotBlank(message = "Title must be entered")
@@ -18,10 +16,7 @@ public record ProjectDTO(
         @Size(min = 4, max = 50, message = "The instruction must be between 4 and 50 characters")
         String howToInteract,
 
-        @NotNull(message = "Cover must be entered")
-        String cover,
-
         @NotNull(message = "Category must be entered")
-        UUID categoryId
+        String category
 ) {
 }

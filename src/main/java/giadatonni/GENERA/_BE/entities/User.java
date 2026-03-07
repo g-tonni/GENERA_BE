@@ -57,7 +57,7 @@ public class User implements UserDetails {
     public User(String name, String email, String password, Role role) {
         this.name = name;
         this.email = email;
-        this.profileImage = "https://ui-avatars.com/api/?name=" + name;
+        this.profileImage = "https://res.cloudinary.com/cloudgiada/image/upload/v1772897891/immagini_default-19_wycc5e.png";
         this.profileCoverSketch = "";
         this.password = password;
         this.createdAt = LocalDateTime.now();

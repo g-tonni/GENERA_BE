@@ -1,5 +1,6 @@
 package giadatonni.GENERA._BE.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -7,6 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "projects")
+@JsonIgnoreProperties({"script"})
 public class Project {
 
     @Id
@@ -46,6 +48,7 @@ public class Project {
 
     public Project(Category category, User author) {
         this.title = "My project";
+        this.cover = "https://res.cloudinary.com/cloudgiada/image/upload/v1772897894/immagini_default-20_wqtzqb.png";
         this.script = "";
         this.published = LocalDate.now();
         this.lastUpdated = LocalDate.now();

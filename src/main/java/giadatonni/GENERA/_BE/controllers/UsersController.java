@@ -25,7 +25,7 @@ public class UsersController {
     }
 
     @GetMapping("/{userId}")
-    public User findUserById(@PathVariable UUID userId) {
+    public User getUserById(@PathVariable UUID userId) {
         return this.usersService.findUserById(userId);
     }
 
@@ -65,5 +65,6 @@ public class UsersController {
             this.usersService.editProfileCoverSketch(user, body);
         }
     }
+
 
 }
