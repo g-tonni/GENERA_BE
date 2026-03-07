@@ -7,12 +7,10 @@ import giadatonni.GENERA._BE.payloads.LoginResponseDTO;
 import giadatonni.GENERA._BE.payloads.RegisterDTO;
 import giadatonni.GENERA._BE.services.AuthService;
 import giadatonni.GENERA._BE.services.UsersService;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +27,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    @ResponseStatus(HttpStatus.CREATED)
     public User register(@RequestBody @Validated RegisterDTO body, BindingResult validationResults) {
         if (validationResults.hasErrors()) {
             List<String> errorsList = validationResults

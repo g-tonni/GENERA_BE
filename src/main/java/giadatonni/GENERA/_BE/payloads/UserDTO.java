@@ -1,6 +1,9 @@
 package giadatonni.GENERA._BE.payloads;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public record UserDTO(
 
@@ -16,9 +19,6 @@ public record UserDTO(
 
         @Size(min = 10, max = 50, message = "The website must be between 10 and 50 characters")
         String website,
-
-        @NotNull(message = "Profile image must be entered")
-        String profileImage,
 
         @NotBlank(message = "Email must be entered")
         @Email(message = "Invalid email address")
