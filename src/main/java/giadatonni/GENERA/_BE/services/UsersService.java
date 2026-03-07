@@ -8,6 +8,7 @@ import giadatonni.GENERA._BE.payloads.RegisterDTO;
 import giadatonni.GENERA._BE.payloads.RoleDTO;
 import giadatonni.GENERA._BE.repositories.RolesRepository;
 import giadatonni.GENERA._BE.repositories.UsersRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -17,10 +18,12 @@ public class UsersService {
 
     private final UsersRepository usersRepository;
     private final RolesRepository rolesRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UsersService(UsersRepository usersRepository, RolesRepository rolesRepository) {
+    public UsersService(UsersRepository usersRepository, RolesRepository rolesRepository, PasswordEncoder passwordEncoder) {
         this.usersRepository = usersRepository;
         this.rolesRepository = rolesRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Role findRoleById(String role) {
@@ -48,7 +51,7 @@ public class UsersService {
 
         Role role = this.findRoleById("USER");
 
-        User newUser = new User(body.name(), body.email(), body.password(), role);
+        User newUser = new User(body.name(), body.email(), passwordEncoder.encode(body.password()), role);
 
         this.usersRepository.save(newUser);
 
