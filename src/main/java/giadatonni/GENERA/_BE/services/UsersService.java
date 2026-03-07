@@ -11,6 +11,7 @@ import giadatonni.GENERA._BE.repositories.UsersRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -26,12 +27,16 @@ public class UsersService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    public List<Role> findAllRoles() {
+        return this.rolesRepository.findAll();
+    }
+
     public Role findRoleById(String role) {
         return this.rolesRepository.findById(role).orElseThrow(() -> new NotFoundException(role));
     }
 
     public Role addRole(RoleDTO body) {
-        this.findRoleById(body.role());
+        if (this.rolesRepository.existsById(body.role())) throw new BadRequestException("Existing role");
 
         Role newRole = new Role(body.role());
 
@@ -40,6 +45,10 @@ public class UsersService {
         System.out.println("Added role: " + newRole.getRole());
 
         return newRole;
+    }
+
+    public List<User> findAllUsers() {
+        return this.usersRepository.findAll();
     }
 
     public User findUserById(UUID userId) {
@@ -56,6 +65,18 @@ public class UsersService {
         this.usersRepository.save(newUser);
 
         System.out.println("Added user: " + newUser.getUserId());
+
+        return newUser;
+    }
+
+    public User addFirstAdmin(RegisterDTO body) {
+        Role role = this.findRoleById("SUPER_ADMIN");
+
+        User newUser = new User(body.name(), body.email(), passwordEncoder.encode(body.password()), role);
+
+        this.usersRepository.save(newUser);
+
+        System.out.println("Added admin: " + newUser.getUserId());
 
         return newUser;
     }

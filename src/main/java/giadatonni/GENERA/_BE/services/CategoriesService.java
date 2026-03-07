@@ -1,10 +1,13 @@
 package giadatonni.GENERA._BE.services;
 
 import giadatonni.GENERA._BE.entities.Category;
+import giadatonni.GENERA._BE.exceptions.BadRequestException;
 import giadatonni.GENERA._BE.exceptions.NotFoundException;
 import giadatonni.GENERA._BE.payloads.CategoryDTO;
 import giadatonni.GENERA._BE.repositories.CategoriesRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CategoriesService {
@@ -15,12 +18,16 @@ public class CategoriesService {
         this.categoriesRepository = categoriesRepository;
     }
 
+    public List<Category> findAllCategories() {
+        return this.categoriesRepository.findAll();
+    }
+
     public Category findCategoryById(String category) {
         return this.categoriesRepository.findById(category).orElseThrow(() -> new NotFoundException(category));
     }
 
     public Category addCategory(CategoryDTO body) {
-        this.findCategoryById(body.category());
+        if (this.categoriesRepository.existsById(body.category())) throw new BadRequestException("Existing category");
 
         Category newCategory = new Category(body.category());
 
