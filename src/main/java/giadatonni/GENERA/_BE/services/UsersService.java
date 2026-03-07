@@ -51,6 +51,10 @@ public class UsersService {
         return this.usersRepository.findAll();
     }
 
+    public User findUserByEmail(String email) {
+        return this.usersRepository.findByEmail(email);
+    }
+
     public User findUserById(UUID userId) {
         return this.usersRepository.findById(userId).orElseThrow(() -> new NotFoundException(userId));
     }
