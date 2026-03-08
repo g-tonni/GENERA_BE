@@ -7,9 +7,6 @@ import java.util.UUID;
 public record AppreciationDTO(
 
         @NotNull(message = "Project id must be entered")
-        UUID projectId,
-
-        @NotNull(message = "User id must be entered")
-        UUID userId
+        UUID projectId
 ) {
 }
