@@ -37,4 +37,12 @@ public class CategoriesService {
 
         return newCategory;
     }
+
+    public void deleteCategory(CategoryDTO body) {
+        Category category = this.findCategoryById(body.category());
+
+        this.categoriesRepository.delete(category);
+
+        System.out.println("Category deleted");
+    }
 }

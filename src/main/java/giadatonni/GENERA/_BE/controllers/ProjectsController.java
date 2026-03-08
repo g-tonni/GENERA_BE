@@ -84,4 +84,10 @@ public class ProjectsController {
             this.projectsService.editSketch(user, projectId, body);
         }
     }
+
+    @DeleteMapping("/{projectId}")
+    public void deleteProject(@AuthenticationPrincipal User user, @PathVariable UUID projectId) {
+        this.projectsService.deleteProject(user, projectId);
+    }
+
 }

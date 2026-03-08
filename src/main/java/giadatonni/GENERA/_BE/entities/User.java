@@ -51,6 +51,21 @@ public class User implements UserDetails {
     @JoinColumn(name = "role", nullable = false)
     private Role role;
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Project> projects;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+    @OneToMany(mappedBy = "follower", cascade = CascadeType.ALL)
+    private List<Connection> following;
+
+    @OneToMany(mappedBy = "followed", cascade = CascadeType.ALL)
+    private List<Connection> followers;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Appreciation> appreciations;
+
     public User() {
     }
 

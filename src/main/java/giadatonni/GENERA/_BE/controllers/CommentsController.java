@@ -64,5 +64,9 @@ public class CommentsController {
         }
     }
 
+    @DeleteMapping("/{commentId}")
+    public void deleteComment(@AuthenticationPrincipal User user, @PathVariable UUID projectId, @PathVariable UUID commentId) {
+        this.commentsService.deleteComment(user, projectId, commentId);
+    }
 
 }

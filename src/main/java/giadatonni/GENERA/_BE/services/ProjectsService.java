@@ -125,4 +125,16 @@ public class ProjectsService {
 
         System.out.println("Sketch updated");
     }
+
+    public void deleteProject(User user, UUID projectId) {
+
+        Project project = this.findProjectById(projectId);
+
+        if (!user.getUserId().equals(project.getAuthor().getUserId()))
+            throw new UnauthorizedException("A user can only delete their own projects");
+
+        this.projectsRepository.delete(project);
+
+        System.out.println("Project deleted");
+    }
 }

@@ -64,6 +64,15 @@ public class UsersService {
         return newRole;
     }
 
+    public void deleteRole(RoleDTO body) {
+
+        Role role = this.findRoleById(body.role());
+
+        this.rolesRepository.delete(role);
+
+        System.out.println("Role deleted");
+    }
+
     public List<User> findAllUsers() {
         return this.usersRepository.findAll();
     }
@@ -157,5 +166,10 @@ public class UsersService {
         System.out.println("Profile cover sketch updated");
     }
 
+    public void deleteUser(User user) {
+        this.usersRepository.delete(user);
+
+        System.out.println("User deleted");
+    }
 
 }

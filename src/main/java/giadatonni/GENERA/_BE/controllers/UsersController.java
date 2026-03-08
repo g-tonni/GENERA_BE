@@ -75,5 +75,10 @@ public class UsersController {
         }
     }
 
+    @DeleteMapping("/me")
+    public void deleteUser(@AuthenticationPrincipal User user) {
+        this.usersService.deleteUser(user);
+    }
+
 
 }

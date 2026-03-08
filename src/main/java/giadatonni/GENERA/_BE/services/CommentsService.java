@@ -3,6 +3,7 @@ package giadatonni.GENERA._BE.services;
 import giadatonni.GENERA._BE.entities.Comment;
 import giadatonni.GENERA._BE.entities.Project;
 import giadatonni.GENERA._BE.entities.User;
+import giadatonni.GENERA._BE.exceptions.BadRequestException;
 import giadatonni.GENERA._BE.exceptions.NotFoundException;
 import giadatonni.GENERA._BE.exceptions.UnauthorizedException;
 import giadatonni.GENERA._BE.payloads.CommentDTO;
@@ -57,6 +58,22 @@ public class CommentsService {
         System.out.println("Comment updated");
 
         return comment;
+    }
+
+    public void deleteComment(User user, UUID projectId, UUID commentId) {
+        Comment comment = this.findCommentById(commentId);
+
+        if (!user.getUserId().equals(comment.getUser().getUserId()))
+            throw new UnauthorizedException("A user can only delete their own comments");
+
+        boolean exists = this.findCommentsByProject(projectId).stream()
+                .anyMatch(com -> com.getCommentId().equals(comment.getCommentId()));
+
+        if (!exists) throw new BadRequestException("The comment is not related to the project");
+
+        this.commentsRepository.delete(comment);
+
+        System.out.println("Comment deleted");
     }
 
 }
