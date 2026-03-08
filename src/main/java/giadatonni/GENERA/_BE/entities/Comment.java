@@ -57,6 +57,14 @@ public class Comment {
         return publishedAt;
     }
 
+    public boolean isUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(boolean updated) {
+        this.updated = updated;
+    }
+
     public Project getProject() {
         return project;
     }
