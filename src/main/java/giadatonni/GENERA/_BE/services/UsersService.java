@@ -12,6 +12,12 @@ import giadatonni.GENERA._BE.payloads.SketchDTO;
 import giadatonni.GENERA._BE.payloads.UserDTO;
 import giadatonni.GENERA._BE.repositories.RolesRepository;
 import giadatonni.GENERA._BE.repositories.UsersRepository;
+import giadatonni.GENERA._BE.specifications.UsersSpecifications;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,12 +34,14 @@ public class UsersService {
     private final RolesRepository rolesRepository;
     private final PasswordEncoder passwordEncoder;
     private final Cloudinary cloudinaryUploader;
+    private final UsersSpecifications usersSpecifications;
 
-    public UsersService(UsersRepository usersRepository, RolesRepository rolesRepository, PasswordEncoder passwordEncoder, Cloudinary cloudinaryUploader) {
+    public UsersService(UsersRepository usersRepository, RolesRepository rolesRepository, PasswordEncoder passwordEncoder, Cloudinary cloudinaryUploader, UsersSpecifications usersSpecifications) {
         this.usersRepository = usersRepository;
         this.rolesRepository = rolesRepository;
         this.passwordEncoder = passwordEncoder;
         this.cloudinaryUploader = cloudinaryUploader;
+        this.usersSpecifications = usersSpecifications;
     }
 
     public List<Role> findAllRoles() {
@@ -58,6 +66,20 @@ public class UsersService {
 
     public List<User> findAllUsers() {
         return this.usersRepository.findAll();
+    }
+
+    public Page<User> searchUsers(int page, int size, String orderBy, String partialName) {
+        if (size > 20 || size < 0) size = 10;
+        if (page < 0) page = 0;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy).ascending());
+
+        Specification<User> spec = (root, query, cb) -> cb.conjunction();
+
+        if (partialName != null) {
+            spec = spec.and(usersSpecifications.partialNameEqualsTo(partialName));
+        }
+
+        return this.usersRepository.findAll(spec, pageable);
     }
 
     public User findUserByEmail(String email) {
@@ -135,5 +157,5 @@ public class UsersService {
         System.out.println("Profile cover sketch updated");
     }
 
-    
+
 }

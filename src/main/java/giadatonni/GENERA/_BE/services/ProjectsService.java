@@ -10,6 +10,12 @@ import giadatonni.GENERA._BE.exceptions.UnauthorizedException;
 import giadatonni.GENERA._BE.payloads.ProjectDTO;
 import giadatonni.GENERA._BE.payloads.SketchDTO;
 import giadatonni.GENERA._BE.repositories.ProjectsRepository;
+import giadatonni.GENERA._BE.specifications.ProjectsSpecifications;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,15 +29,35 @@ public class ProjectsService {
     private final ProjectsRepository projectsRepository;
     private final CategoriesService categoriesService;
     private final Cloudinary cloudinaryUploader;
+    private final ProjectsSpecifications projectsSpecifications;
 
-    public ProjectsService(ProjectsRepository projectsRepository, CategoriesService categoriesService, Cloudinary cloudinaryUploader) {
+    public ProjectsService(ProjectsRepository projectsRepository, CategoriesService categoriesService, Cloudinary cloudinaryUploader, ProjectsSpecifications projectsSpecifications) {
         this.projectsRepository = projectsRepository;
         this.categoriesService = categoriesService;
         this.cloudinaryUploader = cloudinaryUploader;
+        this.projectsSpecifications = projectsSpecifications;
     }
 
     public Project findProjectById(UUID projectId) {
         return this.projectsRepository.findById(projectId).orElseThrow(() -> new NotFoundException(projectId));
+    }
+
+    public Page<Project> searchProjects(int page, int size, String orderBy, String partialTitle, String category) {
+        if (size > 20 || size < 0) size = 10;
+        if (page < 0) page = 0;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy).ascending());
+
+        Specification<Project> spec = (root, query, cb) -> cb.conjunction();
+
+        if (partialTitle != null) {
+            spec = spec.and(projectsSpecifications.partialTitleEqualsTo(partialTitle));
+        }
+
+        if (category != null) {
+            spec = spec.and(projectsSpecifications.categoryEqualsTo(category));
+        }
+
+        return this.projectsRepository.findAll(spec, pageable);
     }
 
     public Project addProject(User author) {

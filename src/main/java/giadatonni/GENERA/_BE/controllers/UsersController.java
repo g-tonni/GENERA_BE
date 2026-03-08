@@ -5,6 +5,7 @@ import giadatonni.GENERA._BE.exceptions.ValidationException;
 import giadatonni.GENERA._BE.payloads.SketchDTO;
 import giadatonni.GENERA._BE.payloads.UserDTO;
 import giadatonni.GENERA._BE.services.UsersService;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -22,6 +23,14 @@ public class UsersController {
 
     public UsersController(UsersService usersService) {
         this.usersService = usersService;
+    }
+
+    @GetMapping
+    public Page<User> searchUsers(@RequestParam(defaultValue = "0") int page,
+                                  @RequestParam(defaultValue = "10") int size,
+                                  @RequestParam(defaultValue = "name") String orderBy,
+                                  @RequestParam(required = false) String partialName) {
+        return this.usersService.searchUsers(page, size, orderBy, partialName);
     }
 
     @GetMapping("/{userId}")

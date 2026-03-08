@@ -6,6 +6,7 @@ import giadatonni.GENERA._BE.exceptions.ValidationException;
 import giadatonni.GENERA._BE.payloads.ProjectDTO;
 import giadatonni.GENERA._BE.payloads.SketchDTO;
 import giadatonni.GENERA._BE.services.ProjectsService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,16 @@ public class ProjectsController {
 
     public ProjectsController(ProjectsService projectsService) {
         this.projectsService = projectsService;
+    }
+
+    @GetMapping
+    public Page<Project> searchUsers(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "title") String orderBy,
+            @RequestParam(required = false) String partialTitle,
+            @RequestParam(required = false) String category) {
+        return this.projectsService.searchProjects(page, size, orderBy, partialTitle, category);
     }
 
     @GetMapping("/{projectId}")
