@@ -39,7 +39,7 @@ public class ConnectionsService {
     public List<User> findSupportersByFollowed(User followed) {
         return this.connectionsRepository.findByFollowed(followed)
                 .stream()
-                .map(connection -> connection.getFollowed())
+                .map(connection -> connection.getFollower())
                 .toList();
     }
 
@@ -48,11 +48,14 @@ public class ConnectionsService {
 
         return this.connectionsRepository.findByFollowed(followed)
                 .stream()
-                .map(connection -> connection.getFollowed())
+                .map(connection -> connection.getFollower())
                 .toList();
     }
 
     public Connection addConnection(User follower, UUID followedId) {
+        if (follower.getUserId().equals(followedId))
+            throw new BadRequestException("A user cannot follow himself");
+
         User followed = this.usersService.findUserById(followedId);
 
         if (this.connectionsRepository.existsByFollowerAndFollowed(follower, followed))
