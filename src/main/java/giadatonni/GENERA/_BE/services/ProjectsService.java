@@ -42,10 +42,10 @@ public class ProjectsService {
         return this.projectsRepository.findById(projectId).orElseThrow(() -> new NotFoundException(projectId));
     }
 
-    public Page<Project> searchProjects(int page, int size, String orderBy, String partialTitle, String category) {
+    public Page<Project> searchProjects(int page, int size, String orderBy, String sortCriteria, String partialTitle, String category) {
         if (size > 20 || size < 0) size = 10;
         if (page < 0) page = 0;
-        Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy).ascending());
+        Pageable pageable = PageRequest.of(page, size, sortCriteria.equals("asc") ? Sort.by(orderBy).ascending() : Sort.by(orderBy).descending());
 
         Specification<Project> spec = (root, query, cb) -> cb.conjunction();
 

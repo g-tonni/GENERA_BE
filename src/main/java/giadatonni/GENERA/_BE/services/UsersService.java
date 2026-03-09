@@ -7,10 +7,8 @@ import giadatonni.GENERA._BE.entities.User;
 import giadatonni.GENERA._BE.exceptions.BadRequestException;
 import giadatonni.GENERA._BE.exceptions.NotFoundException;
 import giadatonni.GENERA._BE.payloads.RegisterDTO;
-import giadatonni.GENERA._BE.payloads.RoleDTO;
 import giadatonni.GENERA._BE.payloads.SketchDTO;
 import giadatonni.GENERA._BE.payloads.UserDTO;
-import giadatonni.GENERA._BE.repositories.RolesRepository;
 import giadatonni.GENERA._BE.repositories.UsersRepository;
 import giadatonni.GENERA._BE.specifications.UsersSpecifications;
 import org.springframework.data.domain.Page;
@@ -31,46 +29,17 @@ import java.util.UUID;
 public class UsersService {
 
     private final UsersRepository usersRepository;
-    private final RolesRepository rolesRepository;
+    private final RolesService rolesService;
     private final PasswordEncoder passwordEncoder;
     private final Cloudinary cloudinaryUploader;
     private final UsersSpecifications usersSpecifications;
 
-    public UsersService(UsersRepository usersRepository, RolesRepository rolesRepository, PasswordEncoder passwordEncoder, Cloudinary cloudinaryUploader, UsersSpecifications usersSpecifications) {
+    public UsersService(UsersRepository usersRepository, RolesService rolesService, PasswordEncoder passwordEncoder, Cloudinary cloudinaryUploader, UsersSpecifications usersSpecifications) {
         this.usersRepository = usersRepository;
-        this.rolesRepository = rolesRepository;
+        this.rolesService = rolesService;
         this.passwordEncoder = passwordEncoder;
         this.cloudinaryUploader = cloudinaryUploader;
         this.usersSpecifications = usersSpecifications;
-    }
-
-    public List<Role> findAllRoles() {
-        return this.rolesRepository.findAll();
-    }
-
-    public Role findRoleById(String role) {
-        return this.rolesRepository.findById(role).orElseThrow(() -> new NotFoundException(role));
-    }
-
-    public Role addRole(RoleDTO body) {
-        if (this.rolesRepository.existsById(body.role())) throw new BadRequestException("Existing role");
-
-        Role newRole = new Role(body.role());
-
-        this.rolesRepository.save(newRole);
-
-        System.out.println("Added role: " + newRole.getRole());
-
-        return newRole;
-    }
-
-    public void deleteRole(RoleDTO body) {
-
-        Role role = this.findRoleById(body.role());
-
-        this.rolesRepository.delete(role);
-
-        System.out.println("Role deleted");
     }
 
     public List<User> findAllUsers() {
@@ -102,7 +71,7 @@ public class UsersService {
     public User addUser(RegisterDTO body) {
         if (this.usersRepository.existsByEmail(body.email())) throw new BadRequestException("Existing email");
 
-        Role role = this.findRoleById("USER");
+        Role role = this.rolesService.findRoleById("USER");
 
         User newUser = new User(body.name(), body.email(), passwordEncoder.encode(body.password()), role);
 
@@ -114,7 +83,7 @@ public class UsersService {
     }
 
     public User addFirstAdmin(RegisterDTO body) {
-        Role role = this.findRoleById("SUPER_ADMIN");
+        Role role = this.rolesService.findRoleById("SUPER_ADMIN");
 
         User newUser = new User(body.name(), body.email(), passwordEncoder.encode(body.password()), role);
 

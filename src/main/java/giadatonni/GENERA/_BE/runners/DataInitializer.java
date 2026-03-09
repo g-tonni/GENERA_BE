@@ -4,6 +4,7 @@ import giadatonni.GENERA._BE.payloads.CategoryDTO;
 import giadatonni.GENERA._BE.payloads.RegisterDTO;
 import giadatonni.GENERA._BE.payloads.RoleDTO;
 import giadatonni.GENERA._BE.services.CategoriesService;
+import giadatonni.GENERA._BE.services.RolesService;
 import giadatonni.GENERA._BE.services.UsersService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -13,17 +14,20 @@ import org.springframework.stereotype.Component;
 public class DataInitializer implements CommandLineRunner {
 
     private final UsersService usersService;
+    private final RolesService rolesService;
     private final CategoriesService categoriesService;
     private final String adminName;
     private final String adminEmail;
     private final String adminPassword;
 
     public DataInitializer(UsersService usersService,
+                           RolesService rolesService,
                            CategoriesService categoriesService,
                            @Value("${ADMIN_NAME}") String adminName,
                            @Value("${ADMIN_EMAIL}") String adminEmail,
                            @Value("${ADMIN_PASSWORD}") String adminPassword) {
         this.usersService = usersService;
+        this.rolesService = rolesService;
         this.categoriesService = categoriesService;
         this.adminName = adminName;
         this.adminEmail = adminEmail;
@@ -32,10 +36,10 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if (this.usersService.findAllRoles().isEmpty()) {
-            this.usersService.addRole(new RoleDTO("SUPER_ADMIN"));
-            this.usersService.addRole(new RoleDTO("ADMIN"));
-            this.usersService.addRole(new RoleDTO("USER"));
+        if (this.rolesService.findAllRoles().isEmpty()) {
+            this.rolesService.addRole(new RoleDTO("SUPER_ADMIN"));
+            this.rolesService.addRole(new RoleDTO("ADMIN"));
+            this.rolesService.addRole(new RoleDTO("USER"));
         }
 
         if (this.categoriesService.findAllCategories().isEmpty()) {
