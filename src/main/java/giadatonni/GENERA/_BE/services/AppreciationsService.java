@@ -6,6 +6,12 @@ import giadatonni.GENERA._BE.entities.User;
 import giadatonni.GENERA._BE.exceptions.BadRequestException;
 import giadatonni.GENERA._BE.exceptions.NotFoundException;
 import giadatonni.GENERA._BE.repositories.AppreciationsRepository;
+import giadatonni.GENERA._BE.specifications.ProjectsSpecifications;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,23 +23,45 @@ public class AppreciationsService {
     private final AppreciationsRepository appreciationsRepository;
     private final ProjectsService projectsService;
     private final UsersService usersService;
+    private final ProjectsSpecifications projectsSpecifications;
 
-    public AppreciationsService(AppreciationsRepository appreciationsRepository, ProjectsService projectsService, UsersService usersService) {
+    public AppreciationsService(AppreciationsRepository appreciationsRepository, ProjectsService projectsService, UsersService usersService, ProjectsSpecifications projectsSpecifications) {
         this.appreciationsRepository = appreciationsRepository;
         this.projectsService = projectsService;
         this.usersService = usersService;
+        this.projectsSpecifications = projectsSpecifications;
     }
 
     public Appreciation findAppreciationById(UUID appreciationId) {
         return this.appreciationsRepository.findById(appreciationId).orElseThrow(() -> new NotFoundException(appreciationId));
     }
 
-    public List<Project> findProjectsAppreciatedByUserId(UUID userId) {
-        User user = this.usersService.findUserById(userId);
-        return this.appreciationsRepository.findByUser(user)
-                .stream()
-                .map(appreciation -> appreciation.getProject())
-                .toList();
+    public Page<Project> findProjectsAppreciatedByUserId(
+            int page,
+            int size,
+            String orderBy,
+            String sortCriteria,
+            String partialTitle,
+            UUID userId) {
+
+        if (size > 20 || size < 0) size = 10;
+        if (page < 0) page = 0;
+
+        Pageable pageable = PageRequest.of(
+                page,
+                size,
+                sortCriteria.equals("asc")
+                        ? Sort.by(orderBy).ascending()
+                        : Sort.by(orderBy).descending()
+        );
+
+        Specification<Project> spec = (root, query, cb) -> cb.conjunction();
+
+        if (partialTitle != null) {
+            spec = spec.and(projectsSpecifications.partialTitleEqualsTo(partialTitle));
+        }
+
+        return this.appreciationsRepository.findProjectsByUserId(userId, pageable);
     }
 
     public List<Project> findProjectsAppreciatedByUser(User user) {

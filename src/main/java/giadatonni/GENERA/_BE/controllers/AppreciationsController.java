@@ -4,6 +4,7 @@ import giadatonni.GENERA._BE.entities.Appreciation;
 import giadatonni.GENERA._BE.entities.Project;
 import giadatonni.GENERA._BE.entities.User;
 import giadatonni.GENERA._BE.services.AppreciationsService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,14 @@ public class AppreciationsController {
     }
 
     @GetMapping("/users/{userId}/appreciations")
-    public List<Project> findProjectsAppreciatedByUserId(@PathVariable UUID userId) {
-        return this.appreciationsService.findProjectsAppreciatedByUserId(userId);
+    public Page<Project> findProjectsAppreciatedByUserId(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "likedAt") String orderBy,
+            @RequestParam(defaultValue = "desc") String sortCriteria,
+            @RequestParam(required = false) String partialTitle,
+            @PathVariable UUID userId) {
+        return this.appreciationsService.findProjectsAppreciatedByUserId(page, size, orderBy, sortCriteria, partialTitle, userId);
     }
 
     @GetMapping("/users/me/appreciations")

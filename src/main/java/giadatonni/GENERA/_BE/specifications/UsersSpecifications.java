@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class UsersSpecifications {
 
     public Specification<User> partialNameEqualsTo(String partialName) {
+
         return (root, query, criteriaBuilder) ->
                 criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + partialName.toLowerCase() + "%");
     }

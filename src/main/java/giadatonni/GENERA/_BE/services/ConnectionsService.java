@@ -4,6 +4,11 @@ import giadatonni.GENERA._BE.entities.Connection;
 import giadatonni.GENERA._BE.entities.User;
 import giadatonni.GENERA._BE.exceptions.BadRequestException;
 import giadatonni.GENERA._BE.repositories.ConnectionsRepository;
+import giadatonni.GENERA._BE.specifications.ConnectionsSpecifications;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,10 +19,12 @@ public class ConnectionsService {
 
     private final ConnectionsRepository connectionsRepository;
     private final UsersService usersService;
+    private final ConnectionsSpecifications connectionsSpecifications;
 
-    public ConnectionsService(ConnectionsRepository connectionsRepository, UsersService usersService) {
+    public ConnectionsService(ConnectionsRepository connectionsRepository, UsersService usersService, ConnectionsSpecifications connectionsSpecifications) {
         this.connectionsRepository = connectionsRepository;
         this.usersService = usersService;
+        this.connectionsSpecifications = connectionsSpecifications;
     }
 
     public List<User> findUsersFollowedByFollower(User follower) {
@@ -27,13 +34,18 @@ public class ConnectionsService {
                 .toList();
     }
 
-    public List<User> findUsersFollowedByFollowerId(UUID followerId) {
-        User follower = this.usersService.findUserById(followerId);
+    public Page<Connection> findUsersFollowedByFollowerId(int page, int size, String partialName, UUID followerId) {
+        if (size > 20 || size < 0) size = 10;
+        if (page < 0) page = 0;
+        Pageable pageable = PageRequest.of(page, size);
 
-        return this.connectionsRepository.findByFollower(follower)
-                .stream()
-                .map(connection -> connection.getFollowed())
-                .toList();
+        Specification<Connection> spec = connectionsSpecifications.followerIdEquals(followerId);
+
+        if (partialName != null) {
+            spec = spec.and(connectionsSpecifications.followedPartialNameEqualsTo(partialName));
+        }
+
+        return this.connectionsRepository.findAll(spec, pageable);
     }
 
     public List<User> findSupportersByFollowed(User followed) {
@@ -43,13 +55,18 @@ public class ConnectionsService {
                 .toList();
     }
 
-    public List<User> findSupportersByFollowedId(UUID followedId) {
-        User followed = this.usersService.findUserById(followedId);
+    public Page<Connection> findSupportersByFollowedId(int page, int size, String partialName, UUID followedId) {
+        if (size > 20 || size < 0) size = 10;
+        if (page < 0) page = 0;
+        Pageable pageable = PageRequest.of(page, size);
 
-        return this.connectionsRepository.findByFollowed(followed)
-                .stream()
-                .map(connection -> connection.getFollower())
-                .toList();
+        Specification<Connection> spec = connectionsSpecifications.followedIdEquals(followedId);
+
+        if (partialName != null) {
+            spec = spec.and(connectionsSpecifications.followerPartialNameEqualsTo(partialName));
+        }
+
+        return this.connectionsRepository.findAll(spec, pageable);
     }
 
     public Connection addConnection(User follower, UUID followedId) {

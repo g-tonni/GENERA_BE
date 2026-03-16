@@ -3,6 +3,7 @@ package giadatonni.GENERA._BE.controllers;
 import giadatonni.GENERA._BE.entities.Connection;
 import giadatonni.GENERA._BE.entities.User;
 import giadatonni.GENERA._BE.services.ConnectionsService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,12 @@ public class ConnectionsController {
     }
 
     @GetMapping("/users/{followerId}/connections")
-    public List<User> findUsersFollowedByFollower(@PathVariable UUID followerId) {
-        return this.connectionsService.findUsersFollowedByFollowerId(followerId);
+    public Page<Connection> findUsersFollowedByFollower(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) String partialName,
+            @PathVariable UUID followerId) {
+        return this.connectionsService.findUsersFollowedByFollowerId(page, size, partialName, followerId);
     }
 
     @GetMapping("/users/me/supporters")
@@ -35,8 +40,12 @@ public class ConnectionsController {
     }
 
     @GetMapping("/users/{followedId}/supporters")
-    public List<User> findSupportersByFollowedId(@PathVariable UUID followedId) {
-        return this.connectionsService.findSupportersByFollowedId(followedId);
+    public Page<Connection> findSupportersByFollowedId(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) String partialName,
+            @PathVariable UUID followedId) {
+        return this.connectionsService.findSupportersByFollowedId(page, size, partialName, followedId);
     }
 
     @PostMapping("/users/{followedId}/connections")
