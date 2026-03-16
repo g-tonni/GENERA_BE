@@ -1,5 +1,6 @@
 package giadatonni.GENERA._BE.controllers;
 
+import giadatonni.GENERA._BE.entities.Project;
 import giadatonni.GENERA._BE.entities.User;
 import giadatonni.GENERA._BE.exceptions.ValidationException;
 import giadatonni.GENERA._BE.payloads.SketchDTO;
@@ -81,4 +82,13 @@ public class UsersController {
     }
 
 
+    @GetMapping("/{authorId}/projects")
+    public Page<Project> getProjectsByAuthorId(@RequestParam(defaultValue = "0") int page,
+                                               @RequestParam(defaultValue = "10") int size,
+                                               @RequestParam(defaultValue = "lastUpdated") String orderBy,
+                                               @RequestParam(defaultValue = "desc") String sortCriteria,
+                                               @RequestParam(required = false) String partialTitle,
+                                               @PathVariable UUID authorId) {
+        return this.usersService.getProjectsByAuthorId(page, size, orderBy, sortCriteria, partialTitle, authorId);
+    }
 }

@@ -28,11 +28,13 @@ public class ProjectsService {
 
     private final ProjectsRepository projectsRepository;
     private final CategoriesService categoriesService;
+    private final UsersService usersService;
     private final Cloudinary cloudinaryUploader;
     private final ProjectsSpecifications projectsSpecifications;
 
-    public ProjectsService(ProjectsRepository projectsRepository, CategoriesService categoriesService, Cloudinary cloudinaryUploader, ProjectsSpecifications projectsSpecifications) {
+    public ProjectsService(ProjectsRepository projectsRepository, CategoriesService categoriesService, Cloudinary cloudinaryUploader, ProjectsSpecifications projectsSpecifications, UsersService usersService) {
         this.projectsRepository = projectsRepository;
+        this.usersService = usersService;
         this.categoriesService = categoriesService;
         this.cloudinaryUploader = cloudinaryUploader;
         this.projectsSpecifications = projectsSpecifications;
@@ -43,6 +45,7 @@ public class ProjectsService {
     }
 
     public Page<Project> searchProjects(int page, int size, String orderBy, String sortCriteria, String partialTitle, String category) {
+
         if (size > 20 || size < 0) size = 10;
         if (page < 0) page = 0;
         Pageable pageable = PageRequest.of(page, size, sortCriteria.equals("asc") ? Sort.by(orderBy).ascending() : Sort.by(orderBy).descending());

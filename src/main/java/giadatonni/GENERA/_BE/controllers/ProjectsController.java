@@ -28,7 +28,7 @@ public class ProjectsController {
     }
 
     @GetMapping
-    public Page<Project> searchUsers(
+    public Page<Project> searchProjects(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "published") String orderBy,

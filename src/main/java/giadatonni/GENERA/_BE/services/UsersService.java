@@ -2,6 +2,7 @@ package giadatonni.GENERA._BE.services;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import giadatonni.GENERA._BE.entities.Project;
 import giadatonni.GENERA._BE.entities.Role;
 import giadatonni.GENERA._BE.entities.User;
 import giadatonni.GENERA._BE.exceptions.BadRequestException;
@@ -9,7 +10,9 @@ import giadatonni.GENERA._BE.exceptions.NotFoundException;
 import giadatonni.GENERA._BE.payloads.RegisterDTO;
 import giadatonni.GENERA._BE.payloads.SketchDTO;
 import giadatonni.GENERA._BE.payloads.UserDTO;
+import giadatonni.GENERA._BE.repositories.ProjectsRepository;
 import giadatonni.GENERA._BE.repositories.UsersRepository;
+import giadatonni.GENERA._BE.specifications.ProjectsSpecifications;
 import giadatonni.GENERA._BE.specifications.UsersSpecifications;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,13 +36,17 @@ public class UsersService {
     private final PasswordEncoder passwordEncoder;
     private final Cloudinary cloudinaryUploader;
     private final UsersSpecifications usersSpecifications;
+    private final ProjectsSpecifications projectsSpecifications;
+    private final ProjectsRepository projectsRepository;
 
-    public UsersService(UsersRepository usersRepository, RolesService rolesService, PasswordEncoder passwordEncoder, Cloudinary cloudinaryUploader, UsersSpecifications usersSpecifications) {
+    public UsersService(UsersRepository usersRepository, RolesService rolesService, PasswordEncoder passwordEncoder, Cloudinary cloudinaryUploader, UsersSpecifications usersSpecifications, ProjectsSpecifications projectsSpecifications, ProjectsRepository projectsRepository) {
         this.usersRepository = usersRepository;
         this.rolesService = rolesService;
         this.passwordEncoder = passwordEncoder;
         this.cloudinaryUploader = cloudinaryUploader;
         this.usersSpecifications = usersSpecifications;
+        this.projectsSpecifications = projectsSpecifications;
+        this.projectsRepository = projectsRepository;
     }
 
     public List<User> findAllUsers() {
@@ -141,4 +148,35 @@ public class UsersService {
         System.out.println("User deleted");
     }
 
+    public Page<Project> getProjectsByAuthorId(
+            int page,
+            int size,
+            String orderBy,
+            String sortCriteria,
+            String partialTitle,
+            UUID authorId
+    ) {
+
+        User author = this.findUserById(authorId);
+
+        if (size > 20 || size < 0) size = 10;
+        if (page < 0) page = 0;
+
+        Pageable pageable = PageRequest.of(
+                page,
+                size,
+                sortCriteria.equals("asc")
+                        ? Sort.by(orderBy).ascending()
+                        : Sort.by(orderBy).descending()
+        );
+
+        Specification<Project> spec = (root, query, cb) ->
+                cb.equal(root.get("author"), author);
+
+        if (partialTitle != null) {
+            spec = spec.and(projectsSpecifications.partialTitleEqualsTo(partialTitle));
+        }
+
+        return projectsRepository.findAll(spec, pageable);
+    }
 }

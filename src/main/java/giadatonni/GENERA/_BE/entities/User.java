@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "users")
-@JsonIgnoreProperties({"password", "role", "profileCoverSketch", "accountNonExpired", "accountNonLocked", "authorities", "credentialsNonExpired", "enabled"})
+@JsonIgnoreProperties({"password", "role", "accountNonExpired", "accountNonLocked", "authorities", "credentialsNonExpired", "enabled"})
 public class User implements UserDetails {
 
     @Id
@@ -73,36 +73,39 @@ public class User implements UserDetails {
         this.name = name;
         this.email = email;
         this.profileImage = "https://res.cloudinary.com/cloudgiada/image/upload/v1772897891/immagini_default-19_wycc5e.png";
-        this.profileCoverSketch = "\n" +
-                "function setup() {\n" +
-                "  createCanvas(windowWidth, windowHeight);\n" +
-                "  background(100);\n" +
-                "}\n" +
-                "\n" +
-                "let largx,largy,tra;\n" +
-                "let distanza=10;\n" +
-                "\n" +
-                "function draw() {\n" +
-                "  fill(100,100);\n" +
-                "  noStroke();\n" +
-                "  rect(0,0,width,height);\n" +
-                "  for (let i=distanza/2; i<width; i+=distanza){\n" +
-                "    for (let j=distanza/2; j<height; j+=distanza){\n" +
-                "    cerchio(i,j);\n" +
-                "  }\n" +
-                "}\n" +
-                "  \n" +
-                "}\n" +
-                "\n" +
-                "function cerchio(x, y){\n" +
-                "  noStroke();\n" +
-                "  let d=dist(mouseX,mouseY,x,y);\n" +
-                "  largx=map(d,0,800,10,0);\n" +
-                "  let t=dist(mouseX,mouseY,x,y);\n" +
-                "  tra=map(t,0,500,100,30);\n" +
-                "  fill(0,tra);\n" +
-                "  ellipse(x,y,largx,largx);\n" +
-                "}";
+        this.profileCoverSketch = """
+                function setup() {
+                  createCanvas(windowWidth, windowHeight);
+                  background(100);
+                }
+                
+                let largx, largy, tra;
+                let distanza = 10;
+                
+                function draw() {
+                  fill(100,100);
+                  noStroke();
+                  rect(0,0,width,height);
+                
+                  for (let i=distanza/2; i<width; i+=distanza){
+                    for (let j=distanza/2; j<height; j+=distanza){
+                      cerchio(i,j);
+                    }
+                  }
+                }
+                
+                function cerchio(x, y){
+                  noStroke();
+                  let d = dist(mouseX,mouseY,x,y);
+                  largx = map(d,0,800,10,0);
+                
+                  let t = dist(mouseX,mouseY,x,y);
+                  tra = map(t,0,500,100,30);
+                
+                  fill(0,tra);
+                  ellipse(x,y,largx,largx);
+                }
+                """;
         this.password = password;
         this.createdAt = LocalDateTime.now();
         this.role = role;
