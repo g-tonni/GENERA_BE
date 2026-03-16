@@ -1,6 +1,9 @@
 package giadatonni.GENERA._BE.payloads;
 
+import java.util.UUID;
+
 public record LoginResponseDTO(
-        String token
+        String token,
+        UUID userId
 ) {
 }

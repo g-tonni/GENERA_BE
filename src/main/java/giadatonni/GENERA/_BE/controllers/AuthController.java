@@ -51,7 +51,7 @@ public class AuthController {
                     .toList();
             throw new ValidationException(errorsList);
         } else {
-            return new LoginResponseDTO(this.authService.checkCredentialsAndGenerateToken(body));
+            return this.authService.checkCredentialsAndGenerateToken(body);
         }
     }
 }

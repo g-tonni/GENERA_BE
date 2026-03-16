@@ -3,6 +3,7 @@ package giadatonni.GENERA._BE.services;
 import giadatonni.GENERA._BE.entities.User;
 import giadatonni.GENERA._BE.exceptions.UnauthorizedException;
 import giadatonni.GENERA._BE.payloads.LoginDTO;
+import giadatonni.GENERA._BE.payloads.LoginResponseDTO;
 import giadatonni.GENERA._BE.security.JWTTools;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,10 @@ public class AuthService {
         this.jwtTools = jwtTools;
     }
 
-    public String checkCredentialsAndGenerateToken(LoginDTO body) {
+    public LoginResponseDTO checkCredentialsAndGenerateToken(LoginDTO body) {
         User found = this.usersService.findUserByEmail(body.email());
         if (passwordEncoder.matches(body.password(), found.getPassword())) {
-            return this.jwtTools.generateToken(found);
+            return new LoginResponseDTO(this.jwtTools.generateToken(found), found.getUserId());
         } else {
             throw new UnauthorizedException("Incorrect credentials");
         }
