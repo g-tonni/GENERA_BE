@@ -35,7 +35,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String profileImage;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20000)
     private String profileCoverSketch;
 
     @Column(nullable = false)
