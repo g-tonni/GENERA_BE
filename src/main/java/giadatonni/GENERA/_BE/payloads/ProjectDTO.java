@@ -10,10 +10,10 @@ public record ProjectDTO(
         @Size(min = 2, max = 20, message = "The title must be between 2 and 20 characters")
         String title,
 
-        @Size(min = 10, max = 700, message = "The description must be between 10 and 700 characters")
+        @Size(max = 700, message = "The description must have a maximum of 700 characters")
         String description,
 
-        @Size(min = 4, max = 50, message = "The instruction must be between 4 and 50 characters")
+        @Size(max = 50, message = "How to interact section must have a maximum of 50 characters")
         String howToInteract,
 
         @NotNull(message = "Category must be entered")
