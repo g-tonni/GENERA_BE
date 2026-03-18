@@ -1,6 +1,5 @@
 package giadatonni.GENERA._BE.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -9,7 +8,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "projects")
-@JsonIgnoreProperties({"script"})
 public class Project {
 
     @Id
