@@ -54,7 +54,20 @@ public class Project {
     public Project(Category category, User author) {
         this.title = "My project";
         this.cover = "https://res.cloudinary.com/cloudgiada/image/upload/v1772897894/immagini_default-20_wqtzqb.png";
-        this.script = "";
+        this.script = """
+                function setup() {
+                  createCanvas(400, 400);
+                  background(255);
+                  noStroke();
+                }
+                
+                function draw() {
+                  background(255, 20);
+                  stroke(0);
+                  noFill()
+                  ellipse(mouseX, mouseY, 20, 20);
+                }
+                """;
         this.published = LocalDate.now();
         this.lastUpdated = LocalDate.now();
         this.category = category;
