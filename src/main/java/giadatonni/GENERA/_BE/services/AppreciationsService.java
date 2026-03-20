@@ -6,6 +6,7 @@ import giadatonni.GENERA._BE.entities.User;
 import giadatonni.GENERA._BE.exceptions.BadRequestException;
 import giadatonni.GENERA._BE.exceptions.NotFoundException;
 import giadatonni.GENERA._BE.repositories.AppreciationsRepository;
+import giadatonni.GENERA._BE.specifications.AppreciationsSpecifications;
 import giadatonni.GENERA._BE.specifications.ProjectsSpecifications;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,19 +25,21 @@ public class AppreciationsService {
     private final ProjectsService projectsService;
     private final UsersService usersService;
     private final ProjectsSpecifications projectsSpecifications;
+    private final AppreciationsSpecifications appreciationsSpecifications;
 
-    public AppreciationsService(AppreciationsRepository appreciationsRepository, ProjectsService projectsService, UsersService usersService, ProjectsSpecifications projectsSpecifications) {
+    public AppreciationsService(AppreciationsRepository appreciationsRepository, ProjectsService projectsService, UsersService usersService, ProjectsSpecifications projectsSpecifications, AppreciationsSpecifications appreciationsSpecifications) {
         this.appreciationsRepository = appreciationsRepository;
         this.projectsService = projectsService;
         this.usersService = usersService;
         this.projectsSpecifications = projectsSpecifications;
+        this.appreciationsSpecifications = appreciationsSpecifications;
     }
 
     public Appreciation findAppreciationById(UUID appreciationId) {
         return this.appreciationsRepository.findById(appreciationId).orElseThrow(() -> new NotFoundException(appreciationId));
     }
 
-    public Page<Project> findProjectsAppreciatedByUserId(
+    public Page<Appreciation> findProjectsAppreciatedByUserId(
             int page,
             int size,
             String orderBy,
@@ -55,13 +58,13 @@ public class AppreciationsService {
                         : Sort.by(orderBy).descending()
         );
 
-        Specification<Project> spec = (root, query, cb) -> cb.conjunction();
+        Specification<Appreciation> spec = appreciationsSpecifications.userIdEquals(userId);
 
         if (partialTitle != null) {
-            spec = spec.and(projectsSpecifications.partialTitleEqualsTo(partialTitle));
+            spec = spec.and(appreciationsSpecifications.projectPartialTitleEqualsTo(partialTitle));
         }
 
-        return this.appreciationsRepository.findProjectsByUserId(userId, pageable);
+        return this.appreciationsRepository.findAll(spec, pageable);
     }
 
     public List<Project> findProjectsAppreciatedByUser(User user) {

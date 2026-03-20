@@ -22,7 +22,7 @@ public class AppreciationsController {
     }
 
     @GetMapping("/users/{userId}/appreciations")
-    public Page<Project> findProjectsAppreciatedByUserId(
+    public Page<Appreciation> findProjectsAppreciatedByUserId(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "likedAt") String orderBy,
