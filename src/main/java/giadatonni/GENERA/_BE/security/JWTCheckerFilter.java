@@ -53,13 +53,17 @@ public class JWTCheckerFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         AntPathMatcher matcher = new AntPathMatcher();
         String path = request.getServletPath();
+        String method = request.getMethod();
 
         List<String> publicPaths = List.of(
                 "/auth/**",
-                "/projects",
                 "/projects/*/comments",
                 "/projects/*/appreciations"
         );
+
+        if (method.equals("GET") && matcher.match("/projects", path)) {
+            return true;
+        }
 
         return publicPaths.stream().anyMatch(p -> matcher.match(p, path));
     }
