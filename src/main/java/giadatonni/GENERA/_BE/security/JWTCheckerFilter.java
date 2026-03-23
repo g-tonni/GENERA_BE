@@ -15,6 +15,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -50,6 +51,16 @@ public class JWTCheckerFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return new AntPathMatcher().match("/auth/**", request.getServletPath());
+        AntPathMatcher matcher = new AntPathMatcher();
+        String path = request.getServletPath();
+
+        List<String> publicPaths = List.of(
+                "/auth/**",
+                "/projects",
+                "/projects/*/comments",
+                "/projects/*/appreciations"
+        );
+
+        return publicPaths.stream().anyMatch(p -> matcher.match(p, path));
     }
 }

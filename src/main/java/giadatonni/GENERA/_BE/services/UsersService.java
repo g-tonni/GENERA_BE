@@ -68,7 +68,12 @@ public class UsersService {
     }
 
     public User findUserByEmail(String email) {
-        return this.usersRepository.findByEmail(email);
+        User found = this.usersRepository.findByEmail(email);
+        if (found == null) {
+            throw new NotFoundException();
+        } else {
+            return found;
+        }
     }
 
     public User findUserById(UUID userId) {
@@ -111,7 +116,9 @@ public class UsersService {
         user.setLocation(body.location());
         user.setWebsite(body.website());
         user.setEmail(body.email());
-        if (!passwordEncoder.matches(body.password(), user.getPassword())) user.setPassword(body.password());
+        if (body.password() != null && !body.password().isBlank()) {
+            user.setPassword(passwordEncoder.encode(body.password()));
+        }
 
         this.usersRepository.save(user);
 
