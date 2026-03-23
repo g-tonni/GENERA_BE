@@ -11,13 +11,13 @@ public record UserDTO(
         @Size(min = 2, max = 20, message = "The name must be between 2 and 20 characters")
         String name,
 
-        @Size(max = 500, message = "The bio must be between 10 and 500 characters")
+        @Size(max = 500, message = "The bio can have a maximum of 300 characters")
         String bio,
 
-        @Size(max = 20, message = "The location must be between 2 and 20 characters")
+        @Size(max = 20, message = "The location can have a maximum of 20 characters")
         String location,
 
-        @Size(max = 50, message = "The website must be between 10 and 50 characters")
+        @Size(max = 50, message = "The website can have a maximum of 50 characters")
         String website,
 
         @NotBlank(message = "Email must be entered")
