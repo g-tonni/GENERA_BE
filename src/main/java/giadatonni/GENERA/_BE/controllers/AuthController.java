@@ -2,9 +2,7 @@ package giadatonni.GENERA._BE.controllers;
 
 import giadatonni.GENERA._BE.entities.User;
 import giadatonni.GENERA._BE.exceptions.ValidationException;
-import giadatonni.GENERA._BE.payloads.LoginDTO;
-import giadatonni.GENERA._BE.payloads.LoginResponseDTO;
-import giadatonni.GENERA._BE.payloads.RegisterDTO;
+import giadatonni.GENERA._BE.payloads.*;
 import giadatonni.GENERA._BE.services.AuthService;
 import giadatonni.GENERA._BE.services.UsersService;
 import org.springframework.http.HttpStatus;
@@ -53,5 +51,10 @@ public class AuthController {
         } else {
             return this.authService.checkCredentialsAndGenerateToken(body);
         }
+    }
+
+    @PostMapping("/token")
+    public ValidationTokenDTO verifyToken(@RequestBody AccessTokenDTO body) {
+        return this.authService.verifyValidationToken(body);
     }
 }
