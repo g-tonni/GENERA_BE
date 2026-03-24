@@ -56,12 +56,18 @@ public class JWTCheckerFilter extends OncePerRequestFilter {
         String method = request.getMethod();
 
         List<String> publicPaths = List.of(
-                "/auth/**",
-                "/projects/*/comments",
-                "/projects/*/appreciations"
+                "/auth/**"
         );
 
         if (method.equals("GET") && matcher.match("/projects", path)) {
+            return true;
+        }
+
+        if (method.equals("GET") && matcher.match("/projects/*/comments", path)) {
+            return true;
+        }
+
+        if (method.equals("GET") && matcher.match("/projects/*/appreciations", path)) {
             return true;
         }
 
