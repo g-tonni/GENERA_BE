@@ -111,6 +111,52 @@ public class User implements UserDetails {
         this.role = role;
     }
 
+    // Users initializer constructor
+    public User(String name, String bio, String location, String website, String email, String password, Role role) {
+        this.name = name;
+        this.bio = bio;
+        this.location = location;
+        this.website = website;
+        this.email = email;
+        this.profileImage = "https://res.cloudinary.com/cloudgiada/image/upload/v1772897891/immagini_default-19_wycc5e.png";
+        this.profileCoverSketch = """
+                function setup() {
+                  createCanvas(windowWidth, windowHeight);
+                  background(100);
+                }
+                
+                let largx, largy, tra;
+                let distanza = 10;
+                
+                function draw() {
+                  fill(100,100);
+                  noStroke();
+                  rect(0,0,width,height);
+                
+                  for (let i=distanza/2; i<width; i+=distanza){
+                    for (let j=distanza/2; j<height; j+=distanza){
+                      cerchio(i,j);
+                    }
+                  }
+                }
+                
+                function cerchio(x, y){
+                  noStroke();
+                  let d = dist(mouseX,mouseY,x,y);
+                  largx = map(d,0,800,10,0);
+                
+                  let t = dist(mouseX,mouseY,x,y);
+                  tra = map(t,0,500,100,30);
+                
+                  fill(0,tra);
+                  ellipse(x,y,largx,largx);
+                }
+                """;
+        this.password = password;
+        this.createdAt = LocalDateTime.now();
+        this.role = role;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(this.role.getRole()));

@@ -1,0 +1,242 @@
+[
+  {
+    "name": "ArtPixel",
+    "bio": "Digital minimalism lover.",
+    "location": "Berlin",
+    "website": "www.artpixel.com",
+    "email": "artpixel@gmail.com",
+    "password": "ArtPixel2000!"
+  },
+  {
+    "name": "CodeFlow",
+    "bio": "Turning algorithms into visions.",
+    "location": "Tokyo",
+    "website": "www.codeflow.com",
+    "email": "codeflow@gmail.com",
+    "password": "CodeFlow2000!"
+  },
+  {
+    "name": "GenArt88",
+    "bio": "Exploring geometric shapes and patterns.",
+    "location": "Milan",
+    "website": "www.genart88.com",
+    "email": "genart88@gmail.com",
+    "password": "GenArt882000!"
+  },
+  {
+    "name": "DigiDream",
+    "bio": "Dreaming in binary code.",
+    "location": "San Francisco",
+    "website": "www.digidream.com",
+    "email": "digidream@gmail.com",
+    "password": "DigiDream2000!"
+  },
+  {
+    "name": "NeonVibe",
+    "bio": "Bright colors and neon lights enthusiast.",
+    "location": "Seoul",
+    "website": "www.neonvibe.com",
+    "email": "neonvibe@gmail.com",
+    "password": "NeonVibe2000!"
+  },
+  {
+    "name": "VectorBoy",
+    "bio": "All I need is a vector.",
+    "location": "London",
+    "website": "www.vectorboy.com",
+    "email": "vectorboy@gmail.com",
+    "password": "VectorBoy2000!"
+  },
+  {
+    "name": "CyberMente",
+    "bio": "Exploring virtual worlds through code.",
+    "location": "Madrid",
+    "website": "www.cybermente.com",
+    "email": "cybermente@gmail.com",
+    "password": "CyberMente2000!"
+  },
+  {
+    "name": "PixelStar",
+    "bio": "Small squares, big emotions.",
+    "location": "Paris",
+    "website": "www.pixelstar.com",
+    "email": "pixelstar@gmail.com",
+    "password": "PixelStar2000!"
+  },
+  {
+    "name": "DataSoul",
+    "bio": "Finding the soul inside the data.",
+    "location": "Stockholm",
+    "website": "www.datasoul.com",
+    "email": "datasoul@gmail.com",
+    "password": "DataSoul2000!"
+  },
+  {
+    "name": "LogicArt",
+    "bio": "Beauty through pure logic.",
+    "location": "Toronto",
+    "website": "www.logicart.com",
+    "email": "logicart@gmail.com",
+    "password": "LogicArt2000!"
+  },
+  {
+    "name": "FlowState",
+    "bio": "Chasing the creative flow.",
+    "location": "Amsterdam",
+    "website": "www.flowstate.com",
+    "email": "flowstate@gmail.com",
+    "password": "FlowState2000!"
+  },
+  {
+    "name": "VoidMaker",
+    "bio": "Creating from digital nothingness.",
+    "location": "New York",
+    "website": "www.voidmaker.com",
+    "email": "voidmaker@gmail.com",
+    "password": "VoidMaker2000!"
+  },
+  {
+    "name": "SketchCode",
+    "bio": "Quick sketches made in Processing.",
+    "location": "Barcelona",
+    "website": "www.sketchcode.com",
+    "email": "sketchcode@gmail.com",
+    "password": "SketchCode2000!"
+  },
+  {
+    "name": "MetaBrush",
+    "bio": "My brush is a function.",
+    "location": "São Paulo",
+    "website": "www.metabrush.com",
+    "email": "metabrush@gmail.com",
+    "password": "MetaBrush2000!"
+  },
+  {
+    "name": "FractalGaze",
+    "bio": "Lost in infinite details.",
+    "location": "Vienna",
+    "website": "www.fractalgaze.com",
+    "email": "fractalgaze@gmail.com",
+    "password": "FractalGaze2000!"
+  },
+  {
+    "name": "NetWalker",
+    "bio": "A traveler of digital networks.",
+    "location": "Singapore",
+    "website": "www.netwalker.com",
+    "email": "netwalker@gmail.com",
+    "password": "NetWalker2000!"
+  },
+  {
+    "name": "BitSculptor",
+    "bio": "Sculpting bits for passion.",
+    "location": "Sydney",
+    "website": "www.bitsculptor.com",
+    "email": "bitsculptor@gmail.com",
+    "password": "BitSculptor2000!"
+  },
+  {
+    "name": "PureLogic",
+    "bio": "Just code, no fluff.",
+    "location": "Oslo",
+    "website": "www.purelogic.com",
+    "email": "purelogic@gmail.com",
+    "password": "PureLogic2000!"
+  },
+  {
+    "name": "ChromaGen",
+    "bio": "Generator of chromatic spectrums.",
+    "location": "Mexico City",
+    "website": "www.chromagen.com",
+    "email": "chromagen@gmail.com",
+    "password": "ChromaGen2000!"
+  },
+  {
+    "name": "RandomSeed",
+    "bio": "The beauty of the unpredictable.",
+    "location": "Prague",
+    "website": "www.randomseed.com",
+    "email": "randomseed@gmail.com",
+    "password": "RandomSeed2000!"
+  },
+  {
+    "name": "GridMaster",
+    "bio": "Everything stays on the grid.",
+    "location": "Zurich",
+    "website": "www.gridmaster.com",
+    "email": "gridmaster@gmail.com",
+    "password": "GridMaster2000!"
+  },
+  {
+    "name": "SoftPixel",
+    "bio": "Soft and dreamy digital aesthetics.",
+    "location": "Kyoto",
+    "website": "www.softpixel.com",
+    "email": "softpixel@gmail.com",
+    "password": "SoftPixel2000!"
+  },
+  {
+    "name": "TechSpirit",
+    "bio": "Seeking the spirit in the hardware.",
+    "location": "Helsinki",
+    "website": "www.techspirit.com",
+    "email": "techspirit@gmail.com",
+    "password": "TechSpirit2000!"
+  },
+  {
+    "name": "AlphaWave",
+    "bio": "Creative frequencies in motion.",
+    "location": "Lisbon",
+    "website": "www.alphawave.com",
+    "email": "alphawave@gmail.com",
+    "password": "AlphaWave2000!"
+  },
+  {
+    "name": "ZenCoder",
+    "bio": "Clean code, free mind.",
+    "location": "Vancouver",
+    "website": "www.zencoder.com",
+    "email": "zencoder@gmail.com",
+    "password": "ZenCoder2000!"
+  },
+  {
+    "name": "InfiniteLoop",
+    "bio": "Art that never ends.",
+    "location": "Copenhagen",
+    "website": "www.infiniteloop.com",
+    "email": "infiniteloop@gmail.com",
+    "password": "InfiniteLoop2000!"
+  },
+  {
+    "name": "GlitchSoul",
+    "bio": "There is beauty in the error.",
+    "location": "Reykjavik",
+    "website": "www.glitchsoul.com",
+    "email": "glitchsoul@gmail.com",
+    "password": "GlitchSoul2000!"
+  },
+  {
+    "name": "Parametric",
+    "bio": "Designing with variables.",
+    "location": "Dubai",
+    "website": "www.parametric.com",
+    "email": "parametric@gmail.com",
+    "password": "Parametric2000!"
+  },
+  {
+    "name": "ShaderMagic",
+    "bio": "Mastering the GPU for art.",
+    "location": "Seattle",
+    "website": "www.shadermagic.com",
+    "email": "shadermagic@gmail.com",
+    "password": "ShaderMagic2000!"
+  },
+  {
+    "name": "AlgoArtist",
+    "bio": "Algorithms are my muse.",
+    "location": "Dublin",
+    "website": "www.algoartist.com",
+    "email": "algoartist@gmail.com",
+    "password": "AlgoArtist2000!"
+  }
+]

@@ -8,6 +8,7 @@ import giadatonni.GENERA._BE.services.RolesService;
 import giadatonni.GENERA._BE.services.UsersService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -35,6 +36,7 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     @Override
+    @Order(1)
     public void run(String... args) throws Exception {
         if (this.rolesService.findAllRoles().isEmpty()) {
             this.rolesService.addRole(new RoleDTO("SUPER_ADMIN"));

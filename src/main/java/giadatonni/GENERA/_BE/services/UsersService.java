@@ -94,6 +94,20 @@ public class UsersService {
         return newUser;
     }
 
+    public User addInitialUser(UserDTO body) {
+        if (this.usersRepository.existsByEmail(body.email())) throw new BadRequestException("Existing email");
+
+        Role role = this.rolesService.findRoleById("USER");
+
+        User newUser = new User(body.name(), body.bio(), body.location(), body.website(), body.email(), passwordEncoder.encode(body.password()), role);
+
+        this.usersRepository.save(newUser);
+
+        System.out.println("Added initial user: " + newUser.getUserId());
+
+        return newUser;
+    }
+
     public User addFirstAdmin(RegisterDTO body) {
         Role role = this.rolesService.findRoleById("SUPER_ADMIN");
 
