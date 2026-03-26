@@ -1,0 +1,242 @@
+[
+  {
+    "title": "Quantum Flux",
+    "description": "Particles that form ephemeral connections based on proximity, creating a shifting web of light and shadow.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527110/61_pqhudz.png",
+    "script": "let pts=[];function setup(){createCanvas(windowWidth,windowHeight);for(let i=0;i<100;i++)pts.push({p:createVector(random(width),random(height)),v:p5.Vector.random2D()})}function draw(){background(5);pts.forEach(pt=>{pt.p.add(pt.v);if(pt.p.x<0||pt.p.x>width)pt.v.x*=-1;if(pt.p.y<0||pt.p.y>height)pt.v.y*=-1;pts.forEach(other=>{let d=dist(pt.p.x,pt.p.y,other.p.x,other.p.y);if(d<120){stroke(0,180,255,map(d,0,120,255,0));line(pt.p.x,pt.p.y,other.p.x,other.p.y)}});noStroke();fill(255);ellipse(pt.p.x,pt.p.y,3,3)})}",
+    "category": "Particles"
+  },
+  {
+    "title": "Neon Smoke Tendrils",
+    "description": "Ultra-light particles with high friction that leave long, fading trails, mimicking the movement of colored smoke in a vacuum.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527112/62_llfks0.png",
+    "script": "let p=[];function setup(){createCanvas(800,600);background(0)}function draw(){if(p.length<400)p.push(new Part());background(0,10);p.forEach((part,i)=>{part.update();part.show();if(part.life<=0)p.splice(i,1)})}class Part{constructor(){this.pos=createVector(width/2,height/2);this.vel=p5.Vector.random2D().mult(random(2,5));this.life=255;this.c=color(random(100,255),0,random(100,255))}update(){this.pos.add(this.vel);this.vel.mult(0.97);this.life-=2}show(){stroke(this.c,this.life);strokeWeight(2);line(this.pos.x,this.pos.y,this.pos.x-this.vel.x*2,this.pos.y-this.vel.y*2)}}",
+    "category": "Particles"
+  },
+  {
+    "title": "Galaxy Spiral Assembler",
+    "description": "Particles influenced by a central black hole force, creating a rotating spiral galaxy with varying density disks.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527113/63_rsufyx.png",
+    "script": "let stars=[];function setup(){createCanvas(600,600);for(let i=0;i<800;i++)stars.push({a:random(TWO_PI),r:random(50,300),s:random(0.01,0.03)})}function draw(){background(10,20);translate(width/2,height/2);noStroke();for(let s of stars){s.a+=s.s;let x=cos(s.a)*s.r;let y=sin(s.a)*s.r;fill(150,200,255,150);ellipse(x,y,2,2)}}",
+    "category": "Particles"
+  },
+  {
+    "title": "Bioluminescent Rain",
+    "description": "Vertical particle streams that splash and dissipate upon reaching a virtual floor, using glow effects.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527112/64_n1t06b.png",
+    "script": "let drops=[];function setup(){createCanvas(windowWidth,windowHeight)}function draw(){background(0,30);if(random()<0.3)drops.push({x:random(width),y:0,v:random(5,10)});drops.forEach((d,i)=>{d.y+=d.v;stroke(0,255,200);line(d.x,d.y,d.x,d.y+10);if(d.y>height-50){for(let j=0;j<5;j++){point(d.x+random(-10,10),d.y+random(-5,5))}drops.splice(i,1)}})}",
+    "category": "Particles"
+  },
+  {
+    "title": "Kinetic Sand Vibration",
+    "description": "Small grains that settle into Chladni-like patterns driven by invisible frequency waves across the canvas.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527112/65_jivjc2.png",
+    "script": "let grains=[];function setup(){createCanvas(500,500);for(let i=0;i<1500;i++)grains.push(createVector(random(width),random(height)))}function draw(){background(240);stroke(0,150);let f=frameCount*0.02;grains.forEach(g=>{let n=noise(g.x*0.01,g.y*0.01,f);g.x+=cos(n*TWO_PI);g.y+=sin(n*TWO_PI);if(g.x<0||g.x>width||g.y<0||g.y>height){g.x=random(width);g.y=random(height)}point(g.x,g.y)})}",
+    "category": "Particles"
+  },
+  {
+    "title": "Orbiting Fireflies",
+    "description": "Pairs of particles that orbit each other while drifting through space, creating a dual-light trace effect.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527113/66_amodif.png",
+    "script": "let flies=[];function setup(){createCanvas(800,400);for(let i=0;i<30;i++)flies.push({p:createVector(random(width),random(height)),a:0,s:random(0.02,0.05)})}function draw(){background(0,15);flies.forEach(f=>{f.p.x=(f.p.x+1)%width;f.a+=f.s;let offX=cos(f.a)*30;let offY=sin(f.a)*30;noStroke();fill(255,255,150);ellipse(f.p.x+offX,f.p.y+offY,4,4);ellipse(f.p.x-offX,f.p.y-offY,2,2)})}",
+    "category": "Particles"
+  },
+  {
+    "title": "Aura Field Disturbance",
+    "description": "A dense field of static particles that react to a moving invisible attractor, creating a ripple in a sea of dots.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527115/67_xdwybs.png",
+    "script": "let grid=[];function setup(){createCanvas(600,600);for(let x=0;x<width;x+=15)for(let y=0;y<height;y+=15)grid.push(createVector(x,y))}function draw(){background(255);let mx=width/2+cos(frameCount*0.05)*150;let my=height/2+sin(frameCount*0.03)*150;grid.forEach(p=>{let d=dist(mx,my,p.x,p.y);let off=map(min(d,100),0,100,15,0);fill(0);ellipse(p.x+random(-off,off),p.y+random(-off,off),2,2)})}",
+    "category": "Particles"
+  },
+  {
+    "title": "Abstract Snow Drift",
+    "description": "Soft, translucent particles that follow a complex wind field, accumulating visually in the center of the screen.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527116/68_pblzle.png",
+    "script": "let flakes=[];function setup(){createCanvas(600,600);noStroke()}function draw(){background(200,220,255,20);if(flakes.length<200)flakes.push({x:random(width),y:-10,s:random(2,5),o:random(TWO_PI)});flakes.forEach(f=>{f.y+=f.s;f.x+=sin(f.o+frameCount*0.01)*2;fill(255,180);ellipse(f.x,f.y,f.s,f.s);if(f.y>height)f.y=-10})}",
+    "category": "Particles"
+  },
+  {
+    "title": "Interactive Particle Vortex",
+    "description": "A dense field of kinetic particles that visually swarms around the mouse cursor, creating a swirling vortex of light.",
+    "howToInteract": "Move your mouse over the canvas to attract and swirl the particle swarm.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527118/69_hse3qy.png",
+    "script": "let particles=[];function setup(){createCanvas(windowWidth,windowHeight);for(let i=0;i<1000;i++)particles.push(new P())}function draw(){background(10,30);particles.forEach(p=>{p.update();p.show()})}class P{constructor(){this.pos=createVector(random(width),random(height));this.vel=p5.Vector.random2D();this.acc=createVector(0,0);this.maxs=4;this.maxf=0.1}update(){let mouse=createVector(mouseX,mouseY);let dir=p5.Vector.sub(mouse,this.pos);let d=dir.mag();if(d<200){dir.setMag(map(d,0,200,this.maxs,0));let steer=p5.Vector.sub(dir,this.vel);steer.limit(this.maxf);this.acc.add(steer)}else{this.acc.add(p5.Vector.random2D().mult(0.01))}this.vel.add(this.acc);this.vel.limit(this.maxs);this.pos.add(this.vel);this.acc.mult(0);this.handleEdges()}show(){stroke(100,200,255,150);strokeWeight(2);point(this.pos.x,this.pos.y)}handleEdges(){if(this.pos.x<0)this.pos.x=width;if(this.pos.x>width)this.pos.x=0;if(this.pos.y<0)this.pos.y=height;if(this.pos.y>height)this.pos.y=0}}",
+    "category": "Particles"
+  },
+  {
+    "title": "Magnetic Repulsion Grid",
+    "description": "A grid of static dots that behave like interconnected magnets. The mouse cursor acts as a powerful repelling magnet, distorting the grid in real-time.",
+    "howToInteract": "Move your mouse to push the particles away. They will spring back when the mouse moves away.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527119/70_uvtzks.png",
+    "script": "let nodes=[];let gap=20;function setup(){createCanvas(windowWidth,600);for(let x=gap;x<width;x+=gap){for(let y=gap;y<height;y+=gap){nodes.push(new Node(x,y))}}}function draw(){background(240);nodes.forEach(n=>{n.update();n.show()})}class Node{constructor(x,y){this.orig=createVector(x,y);this.pos=createVector(x,y);this.vel=createVector(0,0);this.acc=createVector(0,0);this.k=0.1;this.damp=0.9}update(){let mouse=createVector(mouseX,mouseY);let dir=p5.Vector.sub(this.pos,mouse);let d=dir.mag();if(d<150){let force=map(d,0,150,20,0);dir.setMag(force);this.acc.add(dir)}let spring=p5.Vector.sub(this.orig,this.pos);spring.mult(this.k);this.acc.add(spring);this.vel.add(this.acc);this.vel.mult(this.damp);this.pos.add(this.vel);this.acc.mult(0)}show(){fill(0,100,200);noStroke();ellipse(this.pos.x,this.pos.y,4,4);stroke(0,100,200,50);line(this.pos.x,this.pos.y,this.orig.x,this.orig.y)}}",
+    "category": "Particles"
+  },
+  {
+    "title": "Neural Synapse Pulse",
+    "description": "A particle simulation mimicking neural firing, where signals travel between nodes leaving glowing biosynthetic trails.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527119/71_bjatgf.png",
+    "script": "let nodes=[],signals=[];function setup(){createCanvas(600,600);for(let i=0;i<40;i++)nodes.push(createVector(random(width),random(height)))}function draw(){background(5,40);nodes.forEach(n=>{fill(50,100,255);noStroke();ellipse(n.x,n.y,3,3)});if(frameCount%10==0){let start=random(nodes);let end=random(nodes);signals.push({p:start.copy(),t:end,v:0});}signals.forEach((s,i)=>{s.v+=0.02;let pos=p5.Vector.lerp(s.p,s.t,s.v);fill(0,255,200);ellipse(pos.x,pos.y,4,4);if(s.v>=1)signals.splice(i,1);})}",
+    "category": "Particles"
+  },
+  {
+    "title": "Gravity Well Simulation",
+    "description": "Particles trapped in a multi-body gravity system, orbiting invisible mass points and creating complex spirographic paths.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527120/72_izde97.png",
+    "script": "let p=[];let wells=[];function setup(){createCanvas(windowWidth,600);for(let i=0;i<3;i++)wells.push(createVector(random(width),random(height)));for(let i=0;i<200;i++)p.push({pos:createVector(random(width),random(height)),vel:p5.Vector.random2D(),c:color(random(200,255),random(100,200),0)})}function draw(){background(0,20);p.forEach(item=>{wells.forEach(w=>{let force=p5.Vector.sub(w,item.pos);let d=constrain(force.mag(),5,100);force.setMag(10/d);item.vel.add(force)});item.pos.add(item.vel);stroke(item.c);point(item.pos.x,item.pos.y)})}",
+    "category": "Particles"
+  },
+  {
+    "title": "Kinetic Vector Surface",
+    "description": "A dense field of responsive vectors that align and pulsate based on the cursor's velocity and position, simulating a magnetic liquid membrane.",
+    "howToInteract": "Move your mouse quickly to create waves; the faster you move, the more the 'liquid' reacts and glows.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527121/73_lblp6a.png",
+    "script": "let grid = 20; function setup() { createCanvas(windowWidth, windowHeight); strokeCap(ROUND); } function draw() { background(5); for (let x = grid; x < width; x += grid) { for (let y = grid; y < height; y += grid) { let d = dist(mouseX, mouseY, x, y); let angle = atan2(mouseY - y, mouseX - x); let mag = map(min(d, 200), 0, 200, 20, 0); let speed = dist(mouseX, mouseY, pmouseX, pmouseY); let r = map(sin(frameCount * 0.1 + d * 0.05), -1, 1, 100, 255); push(); translate(x, y); rotate(angle); stroke(r, speed * 5, 255 - r, 150); strokeWeight(map(mag, 0, 20, 1, 4)); line(0, 0, mag + speed/2, 0); pop(); } } }",
+    "category": "Interactive"
+  },
+  {
+    "title": "Magnetic Fluid Surface",
+    "description": "An interactive mesh that acts like a ferrofluid, spikes and ripples follow the mouse with elastic tension.",
+    "howToInteract": "Move the mouse to pull the liquid spikes toward the cursor.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527122/74_upkct6.png",
+    "script": "function setup(){createCanvas(600,600)}function draw(){background(0);stroke(255,150);for(let x=50;x<width;x+=30){for(let y=50;y<height;y+=30){let d=dist(mouseX,mouseY,x,y);let ang=atan2(mouseY-y,mouseX-x);let mag=map(min(d,200),0,200,40,0);line(x,y,x+cos(ang)*mag,y+sin(ang)*mag);ellipse(x+cos(ang)*mag,y+sin(ang)*mag,2,2)}}}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Soundwave Simulator",
+    "description": "Visualizes a virtual sound frequency that reacts to horizontal mouse position for amplitude and vertical for pitch.",
+    "howToInteract": "Move the mouse: X controls amplitude, Y controls frequency density.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527123/75_zsxfst.png",
+    "script": "function setup(){createCanvas(windowWidth,400)}function draw(){background(255);stroke(0);noFill();let amp=map(mouseX,0,width,0,150);let freq=map(mouseY,0,height,0.01,0.2);beginShape();for(let x=0;x<width;x+=5){let y=height/2+sin(x*freq+frameCount*0.1)*amp;vertex(x,y)}endShape()}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Particle repulsion brush",
+    "description": "A field of dots that flee from the mouse and slowly return to their original grid position.",
+    "howToInteract": "Pass the mouse over the dots to scatter them.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527124/76_l8gdsz.png",
+    "script": "let dots=[];function setup(){createCanvas(600,600);for(let x=0;x<width;x+=20)for(let y=0;y<height;y+=20)dots.push({ox:x,oy:y,x:x,y:y})}function draw(){background(255);dots.forEach(d=>{let distM=dist(mouseX,mouseY,d.x,d.y);if(distM<100){let ang=atan2(d.y-mouseY,d.x-mouseX);d.x+=cos(ang)*5;d.y+=sin(ang)*5}d.x=lerp(d.x,d.ox,0.1);d.y=lerp(d.y,d.oy,0.1);fill(0);noStroke();ellipse(d.x,d.y,3,3)})}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Kaleidoscopic Pointer",
+    "description": "A mirrored drawing tool that replicates mouse movement across 8 axes with shifting neon colors.",
+    "howToInteract": "Move the mouse to draw complex kaleidoscopic patterns in real-time.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527126/77_csvmuv.png",
+    "script": "function setup(){createCanvas(windowWidth,windowHeight);background(0)}function draw(){translate(width/2,height/2);let mx=mouseX-width/2;let my=mouseY-height/2;let pmx=pmouseX-width/2;let pmy=pmouseY-height/2;stroke(frameCount%255,255,255);for(let i=0;i<8;i++){rotate(TWO_PI/8);line(mx,my,pmx,pmy);line(mx,-my,pmx,-pmy)}}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Elastic Cube Deformer",
+    "description": "A 3D cube in a spatial environment that squashes and stretches based on mouse proximity.",
+    "howToInteract": "Move the mouse to distort the cube's dimensions in 3D space.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527127/78_vlfmw1.png",
+    "script": "function setup(){createCanvas(500,500,WEBGL)}function draw(){background(240);rotateX(frameCount*0.01);rotateY(frameCount*0.01);let sX=map(mouseX,0,width,0.5,2);let sY=map(mouseY,0,height,0.5,2);scale(sX,sY,1);stroke(0);fill(100,200,255,150);box(150)}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Floating Geometry Grid",
+    "description": "A grid of 3D boxes that react to a central wave function, creating a rhythmic architectural pulse.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527128/79_ktvxg0.png",
+    "script": "function setup(){createCanvas(500,500,WEBGL)}function draw(){background(10);rotateX(PI/3);let offset=0;for(let y=-200;y<200;y+=20){for(let x=-200;x<200;x+=20){let d=dist(x,y,0,0);let a=d*0.05-frameCount*0.05;let h=map(sin(a),-1,1,20,150);push();translate(x,y,h/2);fill(map(h,20,150,50,255),100,200);box(18,18,h);pop()}}}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Hyperlight Drifter Grid",
+    "description": "An isometric perspective grid that glows with neon energy as waves pass through it.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527130/80_miutf7.png",
+    "script": "function setup(){createCanvas(windowWidth,windowHeight,WEBGL)}function draw(){background(10);rotateX(1.2);stroke(0,255,255,100);for(let i=-10;i<10;i++){for(let j=-10;j<10;j++){let z=sin(frameCount*0.05+dist(i,j,0,0))*50;push();translate(i*40,j*40,z);noFill();box(38,38,2);pop()}}}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Deformed Polygon Mesh",
+    "description": "A structural grid of polygons that warps and folds based on a mathematical ripple function.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527129/81_eax0n2.png",
+    "script": "function setup(){createCanvas(500,500);fill(255,50);stroke(0,150)}function draw(){background(240);let res=20;for(let x=50;x<width-50;x+=res){for(let y=50;y<height-50;y+=res){let d=dist(x,y,width/2,height/2);let off=sin(d*0.05-frameCount*0.1)*20;beginShape();vertex(x+off,y);vertex(x+res+off,y);vertex(x+res,y+res+off);vertex(x,y+res+off);endShape(CLOSE)}}}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Hyperbolic Deformation Grid",
+    "description": "A grid distorted by a simulated gravitational lens, creating a localized magnification effect that moves in a continuous loop.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527131/82_mfzkud.png",
+    "script": "function setup(){createCanvas(800,800)}function draw(){background(255);stroke(0);noFill();let step=20;let centerX=width/2+cos(frameCount*0.02)*100;let centerY=height/2+sin(frameCount*0.02)*100;for(let x=0;x<width;x+=step){beginShape();for(let y=0;y<height;y+=5){let d=dist(x,y,centerX,centerY);let offset=map(d,0,200,40,0,true);let nx=x+(x-centerX)/d*offset;let ny=y+(y-centerY)/d*offset;if(d<1)nx=x;vertex(nx,ny)}endShape()}for(let y=0;y<height;y+=step){beginShape();for(let x=0;x<width;x+=5){let d=dist(x,y,centerX,centerY);let offset=map(d,0,200,40,0,true);let nx=x+(x-centerX)/d*offset;let ny=y+(y-centerY)/d*offset;vertex(nx,ny)}endShape()}}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Harmonograph Traces",
+    "description": "Complex geometric curves generated by the intersection of multiple pendulums' harmonic motions.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527132/83_tj2tif.png",
+    "script": "let t=0;function setup(){createCanvas(windowWidth,windowHeight);background(255)}function draw(){translate(width/2,height/2);stroke(0,50);for(let i=0;i<100;i++){let x=200*sin(t*1.1+PI/2)+150*sin(t*0.9);let y=200*sin(t*1.0)+150*sin(t*0.8+PI/3);point(x,y);t+=0.001}}",
+    "category": "Generative"
+  },
+  {
+    "title": "Monochrome Flow Field",
+    "description": "High-contrast ink-like strokes following a complex Perlin noise field, creating a calligraphic texture.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527135/84_jvo3ev.png",
+    "script": "function setup(){createCanvas(600,600);background(255);stroke(0,20);noFill()}function draw(){for(let i=0;i<5;i++){let x=random(width),y=random(height);beginShape();for(let j=0;j<30;j++){let n=noise(x*0.005,y*0.005)*TWO_PI*4;x+=cos(n)*5;y+=sin(n)*5;vertex(x,y)}endShape()}}",
+    "category": "Generative"
+  },
+  {
+    "title": "Geometric Nebula",
+    "description": "Abstract radial geometry that expands and contracts using layered trigonometric functions and transparency.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527135/85_w46vl0.png",
+    "script": "function setup(){createCanvas(600,600)}function draw(){background(10,20);translate(width/2,height/2);noFill();for(let i=0;i<100;i+=2){stroke(i*2.5,100,255,150);let r=200+sin(frameCount*0.02+i*0.1)*100;rotate(0.01);rectMode(CENTER);rect(0,0,r,r)}}",
+    "category": "Generative"
+  },
+  {
+    "title": "Floating Islands Silhouette",
+    "description": "Procedural generation of floating landmasses using noise-based vertex displacement and atmospheric perspective.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527135/86_yl79jf.png",
+    "script": "function setup(){createCanvas(800,400);noLoop()}function draw(){background(220,230,240);for(let i=0;i<5;i++){fill(30+i*30);noStroke();let y=100+i*60;beginShape();vertex(0,height);for(let x=0;x<=width;x+=20){let h=noise(x*0.01,i*10)*100;vertex(x,y+h)}vertex(width,height);endShape(CLOSE)}}",
+    "category": "Generative"
+  },
+  {
+    "title": "Ink Drop Diffusion",
+    "description": "Particles that behave like ink drops in water, spreading outward and losing opacity in an organic, fluid way.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527137/87_kmjfrb.png",
+    "script": "let ink=[];function setup(){createCanvas(600,600);background(255);noStroke()}function draw(){if(frameCount%10==0)ink.push({x:random(width),y:random(height),s:1,o:200});ink.forEach((d,i)=>{fill(0,d.o);ellipse(d.x,d.y,d.s);d.s+=2;d.o-=2;if(d.o<0)ink.splice(i,1)})}",
+    "category": "Generative"
+  },
+  {
+    "title": "Aperiodic Monotile Flow",
+    "description": "A complex tiling generation based on aperiodic geometry, where shapes shift their internal luminescence according to a global noise field.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527139/88_v4skqu.png",
+    "script": "function setup(){createCanvas(800,800);noStroke()}function draw(){background(20);let s=50;for(let x=0;x<width+s;x+=s){for(let y=0;y<height+s;y+=s){let n=noise(x*0.01,y*0.01,frameCount*0.02);fill(n*100,n*200,255);push();translate(x,y);rotate(n*TWO_PI);rectMode(CENTER);rect(0,0,s*0.8,s*0.8,s*0.2);pop()}}}",
+    "category": "Generative"
+  },
+  {
+    "title": "Op-Art Pulsing Grid",
+    "description": "An optical illusion pattern where alternating black and white squares expand and contract in a checkerboard wave.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527139/89_nppc2a.png",
+    "script": "function setup(){createCanvas(600,600);noStroke()}function draw(){background(255);let s=40;for(let x=0;x<width;x+=s){for(let y=0;y<height;y+=s){let d=dist(x,y,width/2,height/2);let off=sin(d*0.05-frameCount*0.1)*s/2;fill((x+y)/s%2==0?0:255);rect(x+off/2,y+off/2,s-off,s-off)}}}",
+    "category": "Patterns"
+  },
+  {
+    "title": "Islamic Geometric Lattice",
+    "description": "A generative pattern based on 8-fold symmetry, creating complex interlocking stars and polygons.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774527140/90_opq7ea.png",
+    "script": "function setup(){createCanvas(600,600);noLoop();stroke(0);noFill()}function draw(){background(255);let s=100;for(let x=0;x<=width;x+=s){for(let y=0;y<=height;y+=s){push();translate(x,y);for(let a=0;a<TWO_PI;a+=PI/4){rotate(a);line(0,0,s,s/2);line(0,0,s/2,s)}pop()}}}",
+    "category": "Patterns"
+  }
+]

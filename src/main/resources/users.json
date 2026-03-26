@@ -4,6 +4,7 @@
     "bio": "Digital minimalism lover.",
     "location": "Berlin",
     "website": "www.artpixel.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);noStroke();}function draw(){background(0,15);for(let i=0;i<5;i++){fill(random(255),100,255,50);ellipse(random(width),random(height),random(50,150));}}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "artpixel@gmail.com",
     "password": "ArtPixel2000!"
   },
@@ -12,6 +13,7 @@
     "bio": "Turning algorithms into visions.",
     "location": "Tokyo",
     "website": "www.codeflow.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);}function draw(){background(15);stroke(0,255,200,40);for(let i=0;i<width;i+=30){line(i,0,mouseX,mouseY);line(i,height,mouseX,mouseY);}}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "codeflow@gmail.com",
     "password": "CodeFlow2000!"
   },
@@ -20,6 +22,7 @@
     "bio": "Exploring geometric shapes and patterns.",
     "location": "Milan",
     "website": "www.genart88.com",
+    "profileCoverSketch": "let a=0;function setup(){createCanvas(windowWidth,windowHeight);stroke(0,255,255,60);fill(0,100,255,10);}function draw(){background(5,30);translate(width/2,height/2);for(let i=0;i<12;i++){rotate(PI/6);rect(sin(a)*100,0,height,2);}a+=0.02;}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "genart88@gmail.com",
     "password": "GenArt882000!"
   },
@@ -28,6 +31,7 @@
     "bio": "Dreaming in binary code.",
     "location": "San Francisco",
     "website": "www.digidream.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);colorMode(HSB);}function draw(){background(0,0,5);for(let i=0;i<height;i+=10){stroke((i/2+frameCount)%360,80,80);line(0,i,width,i);}}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "digidream@gmail.com",
     "password": "DigiDream2000!"
   },
@@ -36,6 +40,7 @@
     "bio": "Bright colors and neon lights enthusiast.",
     "location": "Seoul",
     "website": "www.neonvibe.com",
+    "profileCoverSketch": "let p=[];function setup(){createCanvas(windowWidth,windowHeight);for(let i=0;i<100;i++)p.push({x:random(width),y:random(height),vx:random(1,3)});}function draw(){background(10,50);fill(0,255,150);noStroke();p.forEach(b=>{ellipse(b.x,b.y,3);b.x=(b.x+b.vx)%width;});}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "neonvibe@gmail.com",
     "password": "NeonVibe2000!"
   },
@@ -44,6 +49,7 @@
     "bio": "All I need is a vector.",
     "location": "London",
     "website": "www.vectorboy.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);background(0);}function draw(){stroke(random(100,255),0,random(255),30);strokeWeight(1);line(random(width),0,random(width),height);if(frameCount%500==0)background(0,200);}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "vectorboy@gmail.com",
     "password": "VectorBoy2000!"
   },
@@ -52,6 +58,7 @@
     "bio": "Exploring virtual worlds through code.",
     "location": "Madrid",
     "website": "www.cybermente.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);noFill();}function draw(){background(10,25);stroke(255,0,150);beginShape();for(let x=0;x<width;x+=20){let y=height/2+sin(x*0.01+frameCount*0.05)*150;vertex(x,y);}endShape();}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "cybermente@gmail.com",
     "password": "CyberMente2000!"
   },
@@ -60,6 +67,7 @@
     "bio": "Small squares, big emotions.",
     "location": "Paris",
     "website": "www.pixelstar.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);rectMode(CENTER);}function draw(){background(10,0,30);noStroke();fill(150,0,255,15);translate(width/2,height/2);rotate(frameCount*0.01);rect(0,0,height,height);}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "pixelstar@gmail.com",
     "password": "PixelStar2000!"
   },
@@ -68,6 +76,7 @@
     "bio": "Finding the soul inside the data.",
     "location": "Stockholm",
     "website": "www.datasoul.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);background(0);}function draw(){stroke(0,200,255,150);strokeWeight(2);point(random(width),random(height));if(frameCount%150==0)background(0,10);}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "datasoul@gmail.com",
     "password": "DataSoul2000!"
   },
@@ -76,6 +85,7 @@
     "bio": "Beauty through pure logic.",
     "location": "Toronto",
     "website": "www.logicart.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);}function draw(){background(20,0,40);for(let x=0;x<width;x+=60){for(let y=0;y<height;y+=60){fill((x+y+frameCount*3)%255,100,200);noStroke();rect(x+10,y+10,40,40);}}}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "logicart@gmail.com",
     "password": "LogicArt2000!"
   },
@@ -84,6 +94,7 @@
     "bio": "Chasing the creative flow.",
     "location": "Amsterdam",
     "website": "www.flowstate.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);noFill();strokeWeight(3);}function draw(){background(5);stroke(255,200,0,100);ellipse(width/2,height/2,abs(sin(frameCount*0.01))*height*1.2);}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "flowstate@gmail.com",
     "password": "FlowState2000!"
   },
@@ -92,6 +103,7 @@
     "bio": "Creating from digital nothingness.",
     "location": "New York",
     "website": "www.voidmaker.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);}function draw(){background(0,10);stroke(0,255,100,50);line(random(width),0,mouseX,mouseY);line(random(width),height,mouseX,mouseY);}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "voidmaker@gmail.com",
     "password": "VoidMaker2000!"
   },
@@ -100,6 +112,7 @@
     "bio": "Quick sketches made in Processing.",
     "location": "Barcelona",
     "website": "www.sketchcode.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);}function draw(){background(10,5);for(let i=0;i<15;i++){stroke(255,random(100,255),0);strokeWeight(random(2,10));point(random(width),random(height));}}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "sketchcode@gmail.com",
     "password": "SketchCode2000!"
   },
@@ -108,6 +121,7 @@
     "bio": "My brush is a function.",
     "location": "São Paulo",
     "website": "www.metabrush.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);noStroke();}function draw(){background(20,0,20,40);fill(255,0,100,180);ellipse(mouseX,mouseY,sin(frameCount*0.08)*120+150);}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "metabrush@gmail.com",
     "password": "MetaBrush2000!"
   },
@@ -116,6 +130,7 @@
     "bio": "Lost in infinite details.",
     "location": "Vienna",
     "website": "www.fractalgaze.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);stroke(0,150,255,120);}function draw(){background(5);for(let i=0;i<width;i+=45){line(i,0,i+tan(frameCount*0.005)*100,height);}}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "fractalgaze@gmail.com",
     "password": "FractalGaze2000!"
   },
@@ -124,6 +139,7 @@
     "bio": "A traveler of digital networks.",
     "location": "Singapore",
     "website": "www.netwalker.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);textAlign(CENTER,CENTER);colorMode(HSB);}function draw(){background(10,80,10);fill((frameCount*2)%360,90,100);textSize(width/8);textStyle(BOLD);text('PIXEL',width/2,height/2);}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "netwalker@gmail.com",
     "password": "NetWalker2000!"
   },
@@ -132,6 +148,7 @@
     "bio": "Sculpting bits for passion.",
     "location": "Sydney",
     "website": "www.bitsculptor.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);}function draw(){background(0);for(let i=0;i<width;i+=25){stroke(i/4,50,255);strokeWeight(2);line(i,0,width-i,height);}}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "bitsculptor@gmail.com",
     "password": "BitSculptor2000!"
   },
@@ -140,6 +157,7 @@
     "bio": "Just code, no fluff.",
     "location": "Oslo",
     "website": "www.purelogic.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);noStroke();}function draw(){background(0,8);fill(random(50,150),0,255,60);rect(random(width),0,random(30,100),height);}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "purelogic@gmail.com",
     "password": "PureLogic2000!"
   },
@@ -148,6 +166,7 @@
     "bio": "Generator of chromatic spectrums.",
     "location": "Mexico City",
     "website": "www.chromagen.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);}function draw(){background(10,40,20,60);stroke(0,255,150,120);for(let i=0;i<6;i++){line(random(width),random(height),mouseX,mouseY);}}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "chromagen@gmail.com",
     "password": "ChromaGen2000!"
   },
@@ -156,6 +175,7 @@
     "bio": "The beauty of the unpredictable.",
     "location": "Prague",
     "website": "www.randomseed.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);background(0);}function draw(){stroke(255,0,0);strokeWeight(4);point(width/2+cos(frameCount*0.08)*250,height/2+sin(frameCount*0.08)*250);if(frameCount%1000==0)background(0);}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "randomseed@gmail.com",
     "password": "RandomSeed2000!"
   },
@@ -164,6 +184,7 @@
     "bio": "Everything stays on the grid.",
     "location": "Zurich",
     "website": "www.gridmaster.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);background(15,0,15);}function draw(){stroke(255,20,150,40);line(0,random(height),width,random(height));if(frameCount>400)noLoop();}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "gridmaster@gmail.com",
     "password": "GridMaster2000!"
   },
@@ -172,6 +193,7 @@
     "bio": "Soft and dreamy digital aesthetics.",
     "location": "Kyoto",
     "website": "www.softpixel.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);}function draw(){background(5,0,25,15);noStroke();fill(0,255,255,80);ellipse(mouseX,mouseY,150);}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "softpixel@gmail.com",
     "password": "SoftPixel2000!"
   },
@@ -180,6 +202,7 @@
     "bio": "Seeking the spirit in the hardware.",
     "location": "Helsinki",
     "website": "www.techspirit.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);}function draw(){background(5);fill(0,200,255);noStroke();for(let x=0;x<width;x+=25){let h=noise(x*0.01,frameCount*0.03)*height;rect(x,height-h,20,h);}}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "techspirit@gmail.com",
     "password": "TechSpirit2000!"
   },
@@ -188,6 +211,7 @@
     "bio": "Creative frequencies in motion.",
     "location": "Lisbon",
     "website": "www.alphawave.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);strokeWeight(5);}function draw(){background(20,20,40);stroke(255,200,0);for(let i=0;i<width;i+=20){line(i,height/2,i,height/2+sin(i+frameCount*0.1)*150);}}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "alphawave@gmail.com",
     "password": "AlphaWave2000!"
   },
@@ -196,6 +220,7 @@
     "bio": "Clean code, free mind.",
     "location": "Vancouver",
     "website": "www.zencoder.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);}function draw(){background(0,30);stroke(255,50,0);strokeWeight(2);line(0,mouseY,width,height-mouseY);line(width,mouseY,0,height-mouseY);}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "zencoder@gmail.com",
     "password": "ZenCoder2000!"
   },
@@ -204,6 +229,7 @@
     "bio": "Art that never ends.",
     "location": "Copenhagen",
     "website": "www.infiniteloop.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);}function draw(){background(10,10,25);fill(255,100,255,150);noStroke();ellipse(width/2,height/2,noise(frameCount*0.04)*height*1.2);}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "infiniteloop@gmail.com",
     "password": "InfiniteLoop2000!"
   },
@@ -212,6 +238,7 @@
     "bio": "There is beauty in the error.",
     "location": "Reykjavik",
     "website": "www.glitchsoul.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);}function draw(){background(0);for(let i=0;i<height;i+=30){stroke(0,255,100,i/5);strokeWeight(2);line(0,i,width,height-i);}}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "glitchsoul@gmail.com",
     "password": "GlitchSoul2000!"
   },
@@ -220,6 +247,7 @@
     "bio": "Designing with variables.",
     "location": "Dubai",
     "website": "www.parametric.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);background(0);}function draw(){noStroke();fill(random(255),random(100),0);rect(random(width),random(height),15,15);if(frameCount%200==0)background(0,50);}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "parametric@gmail.com",
     "password": "Parametric2000!"
   },
@@ -228,6 +256,7 @@
     "bio": "Mastering the GPU for art.",
     "location": "Seattle",
     "website": "www.shadermagic.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);stroke(255,0,150,80);noFill();strokeWeight(2);}function draw(){background(5,25);translate(width/2,height/2);rotate(frameCount*0.02);rect(0,0,height*0.5,height*0.5);}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "shadermagic@gmail.com",
     "password": "ShaderMagic2000!"
   },
@@ -236,6 +265,7 @@
     "bio": "Algorithms are my muse.",
     "location": "Dublin",
     "website": "www.algoartist.com",
+    "profileCoverSketch": "function setup(){createCanvas(windowWidth,windowHeight);stroke(0,255,255,150);}function draw(){background(0);for(let i=0;i<width;i+=8){line(i,height,i,height-noise(i,frameCount*0.015)*height);}if(frameCount%300==0)noLoop();}function windowResized(){resizeCanvas(windowWidth,windowHeight);}",
     "email": "algoartist@gmail.com",
     "password": "AlgoArtist2000!"
   }

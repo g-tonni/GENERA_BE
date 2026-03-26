@@ -1,0 +1,242 @@
+[
+  {
+    "title": "Mouse Gravity Field",
+    "description": "Particles are attracted and repelled by the mouse, creating dynamic colorful gravitational patterns.",
+    "howToInteract": "Move the mouse to attract particles. Click to repel them.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522633/1_badzcn.png",
+    "script": "let particles=[];let attract=true;function setup(){createCanvas(window.innerWidth,window.innerHeight);colorMode(HSB,360,100,100,100);background(210,20,95);for(let i=0;i<300;i++)particles.push(new P())}function draw(){fill(210,20,95,10);noStroke();rect(0,0,width,height);particles.forEach(p=>{p.update();p.show()})}function mousePressed(){attract=!attract}class P{constructor(){this.pos=createVector(random(width),random(height));this.vel=p5.Vector.random2D();this.h=random(360)}update(){let m=createVector(mouseX,mouseY);let dir=p5.Vector.sub(m,this.pos);let d=dir.mag();dir.normalize();dir.mult(attract?0.4:-0.6);if(d<200)this.vel.add(dir);this.vel.limit(3);this.pos.add(this.vel)}show(){stroke(this.h,80,80,80);point(this.pos.x,this.pos.y)}}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Field Painter",
+    "description": "A colorful flow field reacts to mouse movement, creating vibrant motion trails.",
+    "howToInteract": "Move the mouse to influence flow direction and color shifts.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522634/2_oithxs.png",
+    "script": "let particles=[];function setup(){createCanvas(800,500);colorMode(HSB,360,100,100,100);background(0,0,100);for(let i=0;i<500;i++)particles.push(new P())}function draw(){fill(0,0,100,5);noStroke();rect(0,0,width,height);particles.forEach(p=>{p.update();p.show()})}class P{constructor(){this.pos=createVector(random(width),random(height));this.h=random(360)}update(){let angle=noise(this.pos.x*0.005,this.pos.y*0.005,frameCount*0.01)*TWO_PI*2;let m=map(mouseX,0,width,-1,1);let v=p5.Vector.fromAngle(angle+m);this.pos.add(v);if(this.pos.x<0)this.pos.x=width;if(this.pos.x>width)this.pos.x=0;if(this.pos.y<0)this.pos.y=height;if(this.pos.y>height)this.pos.y=0;this.h=(this.h+1)%360}show(){stroke(this.h,80,90,60);point(this.pos.x,this.pos.y)}}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Elastic Grid Distortion",
+    "description": "A colorful grid deforms elastically around the mouse like a soft surface.",
+    "howToInteract": "Move the mouse to push and pull the grid.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522633/3_vzngwt.png",
+    "script": "let spacing=25;function setup(){createCanvas(600,600);colorMode(HSB,360,100,100)}function draw(){background(210,10,95);for(let x=0;x<=width;x+=spacing){for(let y=0;y<=height;y+=spacing){let d=dist(x,y,mouseX,mouseY);let offset=map(d,0,200,40,0,true);let angle=atan2(y-mouseY,x-mouseX);let nx=x+cos(angle)*offset;let ny=y+sin(angle)*offset;stroke((x+y)%360,70,80);point(nx,ny)}}}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Particle Brush Explosion",
+    "description": "Clicking creates vibrant particle explosions with colorful fading trails.",
+    "howToInteract": "Click anywhere to generate particle explosions.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1772897894/immagini_default-20_wqtzqb.png",
+    "script": "let particles=[];function setup(){createCanvas(500,400);colorMode(HSB,360,100,100,100);background(0)}function draw(){background(0,0,0,20);particles.forEach((p,i)=>{p.update();p.show();if(p.life<0)particles.splice(i,1)})}function mousePressed(){for(let i=0;i<120;i++)particles.push(new P(mouseX,mouseY))}class P{constructor(x,y){this.pos=createVector(x,y);this.vel=p5.Vector.random2D().mult(random(1,6));this.life=255;this.h=random(360)}update(){this.pos.add(this.vel);this.vel.mult(0.97);this.life-=4}show(){stroke(this.h,80,100,this.life/2);point(this.pos.x,this.pos.y)}}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Orbit Control System",
+    "description": "Particles orbit around the mouse in colorful circular paths.",
+    "howToInteract": "Move the mouse to reposition the orbital center.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522634/5_wjpqwb.png",
+    "script": "let particles=[];function setup(){createCanvas(window.innerWidth,500);colorMode(HSB,360,100,100);for(let i=0;i<250;i++)particles.push(new P())}function draw(){background(230,20,15);particles.forEach(p=>{p.update();p.show()})}class P{constructor(){this.angle=random(TWO_PI);this.radius=random(20,200);this.h=random(360)}update(){this.angle+=0.02;this.x=mouseX+cos(this.angle)*this.radius;this.y=mouseY+sin(this.angle)*this.radius}show(){stroke(this.h,80,100);point(this.x,this.y)}}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Wave Distortion Field",
+    "description": "A bright grid reacts with colorful wave distortions emanating from the mouse.",
+    "howToInteract": "Move the mouse to generate waves.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522634/6_qc5qr1.png",
+    "script": "let spacing=20;function setup(){createCanvas(700,300);colorMode(HSB,360,100,100)}function draw(){background(60,10,95);for(let x=0;x<width;x+=spacing){for(let y=0;y<height;y+=spacing){let d=dist(x,y,mouseX,mouseY);let offset=sin(d*0.05-frameCount*0.1)*15;stroke((d+frameCount)%360,80,80);point(x+offset,y+offset)}}}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Magnetic Lines",
+    "description": "Colorful flowing lines bend and align toward the mouse like a dynamic magnetic field.",
+    "howToInteract": "Move the mouse to influence line directions.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522634/7_kjyg6c.png",
+    "script": "function setup(){createCanvas(800,400);colorMode(HSB,360,100,100)}function draw(){background(200,30,15);for(let y=0;y<height;y+=12){beginShape();stroke((y*2+frameCount)%360,80,100);noFill();for(let x=0;x<width;x+=12){let angle=atan2(mouseY-y,mouseX-x);let offset=sin(frameCount*0.05+x*0.05)*8;vertex(x+cos(angle)*offset,y+sin(angle)*offset)}endShape()}}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Colorful Repulsion Field",
+    "description": "Bright particles scatter away from the mouse, leaving colorful trails on a light background.",
+    "howToInteract": "Move the mouse to repel particles and create bursts of color.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522635/8_wpmyql.png",
+    "script": "let particles=[];function setup(){createCanvas(window.innerWidth,window.innerHeight);background(255);colorMode(HSB,360,100,100,100);for(let i=0;i<400;i++)particles.push(new P())}function draw(){fill(255,20);noStroke();rect(0,0,width,height);particles.forEach(p=>{p.update();p.show()})}class P{constructor(){this.pos=createVector(random(width),random(height));this.vel=p5.Vector.random2D();this.h=random(360)}update(){let m=createVector(mouseX,mouseY);let dir=p5.Vector.sub(this.pos,m);let d=dir.mag();if(d<150){dir.normalize().mult(0.5);this.vel.add(dir)}this.vel.limit(3);this.pos.add(this.vel)}show(){stroke(this.h,80,100,80);point(this.pos.x,this.pos.y)}}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Fullscreen Noise Waves",
+    "description": "Soft colorful waves flow across the entire screen using animated noise fields.",
+    "howToInteract": "Move the mouse vertically to control wave intensity.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522636/9_ihmbx3.png",
+    "script": "function setup(){createCanvas(window.innerWidth,window.innerHeight);colorMode(HSB,360,100,100)}function draw(){background(210,10,95);noFill();for(let y=0;y<height;y+=20){beginShape();stroke((y+frameCount)%360,80,80);for(let x=0;x<width;x+=10){let n=noise(x*0.01,y*0.01,frameCount*0.01);let offset=map(mouseY,0,height,10,80)*n;vertex(x,y+offset)}endShape()}}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Interactive Color Grid",
+    "description": "A responsive grid that changes color and size based on proximity to the mouse.",
+    "howToInteract": "Move the mouse to distort and recolor the grid.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522637/10_w7stfv.png",
+    "script": "let spacing=40;function setup(){createCanvas(600,300);colorMode(HSB,360,100,100)}function draw(){background(0,0,100);noStroke();for(let x=0;x<width;x+=spacing){for(let y=0;y<height;y+=spacing){let d=dist(x,y,mouseX,mouseY);let s=map(d,0,200,30,5,true);fill((x+y+frameCount)%360,80,90);rect(x,y,s,s)}}}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Ribbon Trails",
+    "description": "Smooth colorful ribbons follow the mouse creating fluid motion paths.",
+    "howToInteract": "Move the mouse to draw flowing ribbons.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522637/11_drwe3n.png",
+    "script": "let points=[];function setup(){createCanvas(500,500);colorMode(HSB,360,100,100,100);background(30)}function draw(){background(30,20);points.push(createVector(mouseX,mouseY));if(points.length>120)points.shift();noFill();strokeWeight(3);beginShape();for(let i=0;i<points.length;i++){stroke((i*5+frameCount)%360,80,100,80);curveVertex(points[i].x,points[i].y)}endShape()}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Dynamic Voronoi-like Cells",
+    "description": "Cells expand and contract around moving points influenced by the mouse.",
+    "howToInteract": "Move the mouse to shift the cell centers.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522638/12_yo1syn.png",
+    "script": "let pts=[];function setup(){createCanvas(600,400);pixelDensity(1);for(let i=0;i<20;i++){pts.push(createVector(random(width),random(height)))}}function draw(){background(250);loadPixels();for(let x=0;x<width;x++){for(let y=0;y<height;y++){let minD=999999,index=0;for(let i=0;i<pts.length;i++){let dx=x-pts[i].x,dy=y-pts[i].y,d=dx*dx+dy*dy;if(d<minD){minD=d;index=i}}let iPix=(x+y*width)*4;pixels[iPix]=(index*30)%255;pixels[iPix+1]=150;pixels[iPix+2]=200;pixels[iPix+3]=255}}updatePixels();pts.forEach(p=>{p.x+=map(mouseX,0,width,-1,1);p.y+=map(mouseY,0,height,-1,1)})}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Soft Body Cursor",
+    "description": "A jelly-like blob follows the mouse with elastic deformation.",
+    "howToInteract": "Move the mouse to stretch and deform the blob.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522638/13_uvfmzt.png",
+    "script": "let points=[];function setup(){createCanvas(400,600);colorMode(HSB,360,100,100);for(let i=0;i<20;i++){let a=map(i,0,20,0,TWO_PI);points.push(createVector(cos(a)*50,sin(a)*50))}}function draw(){background(210,10,95);translate(mouseX,mouseY);beginShape();fill((frameCount)%360,60,90,80);stroke(0);for(let i=0;i<points.length;i++){let p=points[i];let n=noise(i,frameCount*0.05)*20;curveVertex(p.x+n,p.y+n)}endShape(CLOSE)}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Interactive Light Rays",
+    "description": "Light rays emanate from the mouse and bounce across the canvas.",
+    "howToInteract": "Move the mouse to change the origin of the rays.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522641/14_cgsonu.png",
+    "script": "function setup(){createCanvas(window.innerWidth,400);colorMode(HSB,360,100,100)}function draw(){background(0,0,10);strokeWeight(1);for(let a=0;a<TWO_PI;a+=0.1){let x=mouseX;let y=mouseY;stroke((a*100+frameCount)%360,80,100);for(let i=0;i<50;i++){let nx=x+cos(a)*10;let ny=y+sin(a)*10;line(x,y,nx,ny);x=nx;y=ny}}}",
+    "category": "Interactive"
+  },
+  {
+    "title": "Bouncing Color Bands",
+    "description": "Horizontal bands shift and bounce with color changes based on mouse position.",
+    "howToInteract": "Move the mouse horizontally to shift wave phases.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522641/15_em86ul.png",
+    "script": "function setup(){createCanvas(700,300);colorMode(HSB,360,100,100)}function draw(){background(0,0,100);noStroke();for(let y=0;y<height;y+=10){let offset=sin(y*0.05+mouseX*0.01)*30;fill((y*2+frameCount)%360,80,90);rect(offset,y,width,10)}}",
+    "category": "Interactive"
+  },
+  {
+    "title": "3D Orbit Grid",
+    "description": "A rotating grid of points in 3D space creating a hypnotic orbital illusion.",
+    "howToInteract": "Move the mouse to change rotation speed.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522641/16_vgher3.png",
+    "script": "let angle=0;function setup(){createCanvas(windowWidth,windowHeight,WEBGL)}function draw(){background(10);rotateY(angle);rotateX(angle*0.5);for(let x=-200;x<=200;x+=40){for(let y=-200;y<=200;y+=40){push();translate(x,y,0);let d=dist(0,0,x,y);fill(100+155*sin(d+angle),150,255);noStroke();sphere(5);pop()}}angle+=map(mouseX,0,width,0.001,0.05)}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Depth Wave Field",
+    "description": "A dynamic wave surface simulating depth using sine-based displacement.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522644/17_ngigw0.png",
+    "script": "let t=0;function setup(){createCanvas(600,600,WEBGL)}function draw(){background(255);rotateX(PI/3);translate(-300,-300);stroke(50,100,200);noFill();for(let x=0;x<600;x+=20){beginShape();for(let y=0;y<600;y+=20){let z=sin(x*0.02+y*0.02+t)*50;vertex(x,y,z)}endShape()}t+=0.05}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Tunnel of Points",
+    "description": "A 3D point tunnel giving the illusion of flying through space.",
+    "howToInteract": "Move the mouse to steer the tunnel.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522644/18_eg8huq.png",
+    "script": "let points=[];function setup(){createCanvas(windowWidth,windowHeight,WEBGL);for(let i=0;i<500;i++){points.push(createVector(random(-200,200),random(-200,200),random(0,1000)))}}function draw(){background(0);translate(0,0,-500);for(let p of points){p.z-=5;if(p.z<0)p.z=1000;push();translate(p.x,p.y,p.z);stroke(map(p.z,0,1000,255,50),150,255,200);point(0,0);pop()}}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Color Sphere Cluster",
+    "description": "Multiple spheres pulsate in 3D space with smooth color transitions.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522646/19_gvh7mu.png",
+    "script": "let spheres=[];function setup(){createCanvas(windowWidth,windowHeight,WEBGL);for(let i=0;i<100;i++){spheres.push({x:random(-200,200),y:random(-200,200),z:random(-200,200),r:random(10,30)})}}function draw(){background(255);rotateY(frameCount*0.01);for(let s of spheres){push();translate(s.x,s.y,s.z);fill(150+100*sin(frameCount*0.02+s.x),200,255);noStroke();sphere(s.r);pop()}}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Spiral Galaxy",
+    "description": "Simulates a colorful spiral galaxy with thousands of orbiting stars.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522646/20_v4r1af.png",
+    "script": "let stars=[];function setup(){createCanvas(windowWidth,windowHeight,WEBGL);for(let i=0;i<1000;i++){stars.push({r:random(50,400),angle:random(TWO_PI),speed:random(0.001,0.01),col:color(random(150,255),random(150,255),255)})}}function draw(){background(0);rotateY(frameCount*0.002);for(let s of stars){s.angle+=s.speed;let x=cos(s.angle)*s.r;let y=sin(s.angle)*s.r;push();translate(x,y,0);stroke(s.col);point(0,0);pop()}}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Voxel Mountains",
+    "description": "3D voxel-like mountains generated from Perlin noise.",
+    "howToInteract": "Drag to rotate the scene.",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522647/21_nughvp.png",
+    "script": "let cols,rows;let scl=20;let w=600;let h=600;let terrain=[];function setup(){createCanvas(windowWidth,windowHeight,WEBGL);cols=w/scl;rows=h/scl;for(let x=0;x<cols;x++){terrain[x]=[];for(let y=0;y<rows;y++){terrain[x][y]=0}}}function draw(){background(255);rotateX(PI/3);translate(-w/2,-h/2);let yoff=0;for(let y=0;y<rows;y++){let xoff=0;for(let x=0;x<cols;x++){terrain[x][y]=map(noise(xoff,yoff,frameCount*0.01),0,1,-50,150);xoff+=0.1}yoff+=0.1}for(let y=0;y<rows-1;y++){for(let x=0;x<cols-1;x++){stroke(0);noFill();push();translate(x*scl,y*scl,terrain[x][y]);box(scl,scl,terrain[x][y]);pop()}}}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Tunnel Grid Rainbow",
+    "description": "A moving rainbow tunnel made from a grid of lines converging to a vanishing point.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522648/22_jft7sh.png",
+    "script": "function setup(){createCanvas(windowWidth,windowHeight,WEBGL)}function draw(){background(255);rotateX(frameCount*0.005);rotateY(frameCount*0.005);for(let z=0;z<500;z+=20){for(let x=-200;x<=200;x+=20){for(let y=-200;y<=200;y+=20){push();translate(x,y,-z);stroke((x+y+z+frameCount)%255,150,200);line(0,0,0,0,0,20);pop()}}}}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Dynamic Sphere Mesh",
+    "description": "A mesh of connected spheres oscillates creating a wavy surface effect.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522648/23_qrilrn.png",
+    "script": "let cols=20;let rows=20;let spacing=30;function setup(){createCanvas(800,600,WEBGL)}function draw(){background(0,20,40);rotateX(PI/4);rotateZ(frameCount*0.01);for(let x=0;x<cols;x++){for(let y=0;y<rows;y++){let z=sin(frameCount*0.02+x*0.5+y*0.5)*20;push();translate((x-cols/2)*spacing,(y-rows/2)*spacing,z);fill(100+155*sin(frameCount*0.02+x+y),200,255);noStroke();sphere(10);pop()}}}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Floating Cubes",
+    "description": "Cubes float and rotate in 3D space with changing colors.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522648/24_go8hfo.png",
+    "script": "let cubes=[];function setup(){createCanvas(windowWidth,windowHeight,WEBGL);for(let i=0;i<100;i++){cubes.push({pos:createVector(random(-300,300),random(-300,300),random(-300,300)),rot:random(TWO_PI),speed:random(0.01,0.05)})}}function draw(){background(255);for(let c of cubes){c.rot+=c.speed;push();translate(c.pos.x,c.pos.y,c.pos.z);rotateY(c.rot);rotateX(c.rot);fill(100+155*sin(frameCount*0.01),200,255);box(20);pop()}}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Kaleidoscope Sphere",
+    "description": "A mirrored 3D sphere reflecting rotating colorful patterns.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522648/25_wk95hx.png",
+    "script": "function setup(){createCanvas(600,600,WEBGL)}function draw(){background(0);rotateY(frameCount*0.01);for(let i=0;i<10;i++){push();rotateZ(i*TWO_PI/10);fill(map(sin(frameCount*0.02+i),-1,1,100,255),200,255);noStroke();sphere(50);pop()}}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Particle Orbit Rings",
+    "description": "Particles orbit around multiple invisible rings in 3D space, changing colors over time.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522649/26_jpx7ha.png",
+    "script": "let rings=[];function setup(){createCanvas(windowWidth,windowHeight,WEBGL);for(let i=0;i<5;i++){let ring=[];for(let j=0;j<100;j++){ring.push({angle:TWO_PI/100*j,r:50+50*i})}rings.push(ring)}}function draw(){background(255);rotateX(frameCount*0.01);rotateY(frameCount*0.01);for(let i=0;i<rings.length;i++){for(let p of rings[i]){p.angle+=0.01;let x=cos(p.angle)*p.r;let y=sin(p.angle)*p.r;push();translate(x,y,i*30-50);stroke(map(i,0,rings.length,50,255),200,255);point(0,0);pop()}}}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Expanding Hex Grid",
+    "description": "Hexagonal cells expand and contract in a pulsating rhythm, creating a hypnotic spatial pattern.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522650/27_p2xcrz.png",
+    "script": "let hexSize=20;function setup(){createCanvas(800,600)}function draw(){background(30);stroke(255);noFill();let t=millis()*0.002;for(let x=0;x<width+hexSize;x+=hexSize*1.5){for(let y=0;y<height+hexSize;y+=sqrt(3)*hexSize){let s=hexSize*(0.5+0.5*sin(t+(x+y)*0.01));drawHex(x,y,s)}}}function drawHex(x,y,s){beginShape();for(let i=0;i<6;i++){let a=PI/3*i;vertex(x+cos(a)*s,y+sin(a)*s)}endShape(CLOSE)}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Sinusoidal Grid Flow",
+    "description": "A grid of points connected with lines that flow along a sine-based vector field, creating a smooth spatial motion.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522651/28_zp2qky.png",
+    "script": "let cols=25,rows=25;let spacing;function setup(){createCanvas(600,600);spacing=width/cols}function draw(){background(0);stroke(255);for(let i=0;i<cols;i++){for(let j=0;j<rows;j++){let x=i*spacing;let y=j*spacing;let angle=sin(i*0.3+frameCount*0.02)+cos(j*0.3+frameCount*0.02);let x2=x+20*cos(angle);let y2=y+20*sin(angle);line(x,y,x2,y2)}}}",
+    "category": "Spatial"
+  },
+  {
+    "title": "3D Cube Lattice",
+    "description": "A 3D lattice of cubes rotating together to form a spatial grid, giving a sense of depth and structure.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522652/29_ezfksi.png",
+    "script": "function setup(){createCanvas(600,600,WEBGL)}function draw(){background(30);rotateX(frameCount*0.01);rotateY(frameCount*0.01);stroke(255);noFill();for(let x=-200;x<=200;x+=80){for(let y=-200;y<=200;y+=80){for(let z=-200;z<=200;z+=80){push();translate(x,y,z);box(40);pop()}}}}",
+    "category": "Spatial"
+  },
+  {
+    "title": "Lorenz Attractor",
+    "description": "A representation of the Lorenz system, a set of differential equations that describe chaotic flow in a 3D space.",
+    "howToInteract": "",
+    "cover": "https://res.cloudinary.com/cloudgiada/image/upload/v1774522652/30_zqocwz.png",
+    "script": "let x=0.01,y=0,z=0,a=10,b=28,c=8/3,pts=[];function setup(){createCanvas(600,600,WEBGL);colorMode(HSB)}function draw(){background(0);rotateX(frameCount*0.01);rotateY(frameCount*0.01);let dt=0.01;let dx=(a*(y-x))*dt;let dy=(x*(b-z)-y)*dt;let dz=(x*y-c*z)*dt;x+=dx;y+=dy;z+=dz;pts.push(createVector(x,y,z));noFill();beginShape();pts.forEach((v,i)=>{stroke(i%360,255,255);vertex(v.x*10,v.y*10,v.z*10)});endShape();if(pts.length>1000)pts.shift()}",
+    "category": "Spatial"
+  }
+]

@@ -7,6 +7,7 @@ import giadatonni.GENERA._BE.entities.Role;
 import giadatonni.GENERA._BE.entities.User;
 import giadatonni.GENERA._BE.exceptions.BadRequestException;
 import giadatonni.GENERA._BE.exceptions.NotFoundException;
+import giadatonni.GENERA._BE.payloads.InitialUserDTO;
 import giadatonni.GENERA._BE.payloads.RegisterDTO;
 import giadatonni.GENERA._BE.payloads.SketchDTO;
 import giadatonni.GENERA._BE.payloads.UserDTO;
@@ -94,12 +95,12 @@ public class UsersService {
         return newUser;
     }
 
-    public User addInitialUser(UserDTO body) {
+    public User addInitialUser(InitialUserDTO body) {
         if (this.usersRepository.existsByEmail(body.email())) throw new BadRequestException("Existing email");
 
         Role role = this.rolesService.findRoleById("USER");
 
-        User newUser = new User(body.name(), body.bio(), body.location(), body.website(), body.email(), passwordEncoder.encode(body.password()), role);
+        User newUser = new User(body.name(), body.bio(), body.location(), body.website(), body.profileCoverSketch(), body.email(), passwordEncoder.encode(body.password()), role);
 
         this.usersRepository.save(newUser);
 

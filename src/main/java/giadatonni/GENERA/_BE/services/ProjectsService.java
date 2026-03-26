@@ -7,6 +7,7 @@ import giadatonni.GENERA._BE.entities.Project;
 import giadatonni.GENERA._BE.entities.User;
 import giadatonni.GENERA._BE.exceptions.NotFoundException;
 import giadatonni.GENERA._BE.exceptions.UnauthorizedException;
+import giadatonni.GENERA._BE.payloads.InitialProjectDTO;
 import giadatonni.GENERA._BE.payloads.ProjectDTO;
 import giadatonni.GENERA._BE.payloads.SketchDTO;
 import giadatonni.GENERA._BE.repositories.ProjectsRepository;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -42,6 +44,10 @@ public class ProjectsService {
 
     public Project findProjectById(UUID projectId) {
         return this.projectsRepository.findById(projectId).orElseThrow(() -> new NotFoundException(projectId));
+    }
+
+    public List<Project> findAllProjects() {
+        return this.projectsRepository.findAll();
     }
 
     public Page<Project> searchProjects(int page, int size, String orderBy, String sortCriteria, String partialTitle, String category) {
@@ -71,6 +77,18 @@ public class ProjectsService {
         this.projectsRepository.save(newProject);
 
         System.out.println("Added project: " + newProject.getProjectId());
+
+        return newProject;
+    }
+
+    public Project addInitialProject(InitialProjectDTO body, User author) {
+        Category category = this.categoriesService.findCategoryById(body.category());
+
+        Project newProject = new Project(body.title(), body.description(), body.howToInteract(), body.cover(), body.script(), category, author);
+
+        this.projectsRepository.save(newProject);
+
+        System.out.println("Added initial project: " + newProject.getProjectId());
 
         return newProject;
     }

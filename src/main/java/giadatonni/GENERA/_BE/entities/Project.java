@@ -74,6 +74,18 @@ public class Project {
         this.author = author;
     }
 
+    public Project(String title, String description, String howToInteract, String cover, String script, Category category, User author) {
+        this.title = title;
+        this.description = description;
+        this.howToInteract = howToInteract;
+        this.cover = cover;
+        this.script = script;
+        this.published = LocalDate.now();
+        this.lastUpdated = LocalDate.now();
+        this.category = category;
+        this.author = author;
+    }
+
     public UUID getProjectId() {
         return projectId;
     }

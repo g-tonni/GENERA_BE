@@ -12,6 +12,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
+@Order(1)
 public class DataInitializer implements CommandLineRunner {
 
     private final UsersService usersService;
@@ -36,7 +37,6 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     @Override
-    @Order(1)
     public void run(String... args) throws Exception {
         if (this.rolesService.findAllRoles().isEmpty()) {
             this.rolesService.addRole(new RoleDTO("SUPER_ADMIN"));

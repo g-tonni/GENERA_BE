@@ -1,7 +1,7 @@
 package giadatonni.GENERA._BE.runners;
 
 import giadatonni.GENERA._BE.exceptions.BadRequestException;
-import giadatonni.GENERA._BE.payloads.UserDTO;
+import giadatonni.GENERA._BE.payloads.InitialUserDTO;
 import giadatonni.GENERA._BE.services.UsersService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
@@ -14,12 +14,12 @@ import java.util.List;
 
 @Component
 @Order(2)
-public class UserSeeder implements CommandLineRunner {
+public class UsersSeeder implements CommandLineRunner {
 
     private final UsersService userService; // Usiamo il tuo service
     private final ObjectMapper objectMapper;
 
-    public UserSeeder(UsersService userService, ObjectMapper objectMapper) {
+    public UsersSeeder(UsersService userService, ObjectMapper objectMapper) {
         this.userService = userService;
         this.objectMapper = objectMapper;
     }
@@ -30,10 +30,10 @@ public class UserSeeder implements CommandLineRunner {
 
             InputStream inputStream = TypeReference.class.getResourceAsStream("/users.json");
 
-            List<UserDTO> usersList = objectMapper.readValue(inputStream, new TypeReference<List<UserDTO>>() {
+            List<InitialUserDTO> usersList = objectMapper.readValue(inputStream, new TypeReference<List<InitialUserDTO>>() {
             });
 
-            for (UserDTO dto : usersList) {
+            for (InitialUserDTO dto : usersList) {
                 try {
                     userService.addInitialUser(dto);
                 } catch (BadRequestException e) {
