@@ -31,7 +31,7 @@ public class ProjectsController {
     public Page<Project> searchProjects(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "published") String orderBy,
+            @RequestParam(defaultValue = "lastUpdated") String orderBy,
             @RequestParam(defaultValue = "desc") String sortCriteria,
             @RequestParam(required = false) String partialTitle,
             @RequestParam(required = false) String category) {
